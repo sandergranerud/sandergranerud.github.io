@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sander</title>
 </head>
 <body>
-    <h1>hei</h1>
-    <h2>hallo</h2>
+    <h1>Grunner til at sander er lættis</h1>
+    <p id="text"></p>
+    <button id="button">Klikk her for begrunnelse</button>
+
+    <script>
+        const textEl = document.getElementById('text')
+        const buttonEl = document.getElementById('button')
+
+        buttonEl.addEventListener('click', function(){
+            textEl.innerHTML = "Haha det er ingen grunner, han er autistisk"
+        })
+    </script>
 </body>
 </html>
