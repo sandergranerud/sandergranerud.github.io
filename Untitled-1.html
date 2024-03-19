@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sander</title>
+
+    <link rel="stylesheet" href="index_style.css">
 </head>
 <body>
-    <h1>Grunner til at sander er lættis</h1>
-    <p id="text"></p>
-    <button id="button">Klikk her for begrunnelse</button>
+
+    <main>
+    <canvas id="canvasFrame"></canvas>
+    </main>
 
     <script>
-        const textEl = document.getElementById('text')
-        const buttonEl = document.getElementById('button')
+        let canvas = document.querySelector('canvas')
+        let ctx = canvas.getContext('2d')
 
-        buttonEl.addEventListener('click', function(){
-            textEl.innerHTML = "Haha det er ingen grunner, han er autistisk"
-        })
+        canvas.height = innerHeight
+        canvas.width = innerWidth
+
+
     </script>
+
+
 </body>
 </html>
