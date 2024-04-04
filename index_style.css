@@ -1,0 +1,9 @@
+.games {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.games a img{
+    width: 100px;
+}
