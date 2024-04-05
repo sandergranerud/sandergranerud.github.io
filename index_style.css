@@ -1,9 +1,77 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+
+}
+
+header {     
+    z-index: 11;   
+    position: fixed;    
+    background-color: aliceblue;
+    top: 0;
+    left: auto;
+    right: 0;
+    height: 12.5vh;
+    width: 100vw;
+
+}
+
+main{
+    margin-top: 12.5vh;
+}
+
+
+.bacground-picture {   
+    position: fixed;
+    top: 12.5vh;
+    width: 100vw;
+    height: 87.5vh;
+    z-index: -2;   
+    object-fit: cover;
+}
+
 .games {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
 }
 
-.games a img{
-    width: 100px;
+.games .first_picture, .games .second_games {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10vh 10vw;
+
 }
+
+
+.games a img{
+
+    width: 20vw;
+    height: 15vh;
+    opacity: 1;
+    object-fit: cover;
+    
+}
+
+a {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.games a video { 
+    position:relative ;
+    top: -15vh;
+    height: 15vh;
+    width: 20vw;
+    z-index: -1;
+    opacity: 0;
+    object-fit: cover;
+}
+
+
