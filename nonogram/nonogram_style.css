@@ -1,0 +1,310 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+body{
+    height: 100vh;
+    background-color: #be3144ea;
+    
+}
+
+main{
+
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+
+    height: 89vh;
+
+}
+
+h2, h1, p{
+    color: #22092C;
+    
+}
+
+
+
+header{
+    width: 100vw;
+    height: 10vh;
+
+    background-color: #22092C;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+header .fa-house{
+    color: #872341;
+    font-size: 35px;
+
+    padding: 10px;
+    margin-left: 3vw;
+}
+
+
+
+#score-boxes-container{
+    display: flex;
+    height: 6.5vh;
+    width: 65vw;
+    max-width: 350px;
+    justify-content: space-between;
+
+}
+
+.score-boxes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #22092C;
+    
+    width: 29vw;
+    max-width: 160px;
+}
+
+.score-boxes p{
+    color: white;
+}
+
+
+.boks{
+    
+    border-right: solid 1px;
+    border-bottom: solid 1px;
+
+    
+    opacity: 0.7;
+
+    transition: 0.4s;
+    
+}
+
+.boks:active{
+    transform: scale(1.2);
+}
+
+
+
+.grid{
+    display: grid;
+}
+
+#grid-container{
+    grid-template-columns: 1fr 4fr ;
+    height: 90vw;
+    width: 90vw;
+    max-height: 340px;
+    max-width: 340px;
+    grid-template-rows: 1fr 4fr;
+}
+
+
+.tall-vertikal{
+    border-bottom: solid 0.2px;
+    border-right: solid 0.2px;
+
+    /* border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+    background-image: linear-gradient(to right,  white, #263036); */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    
+    
+
+}
+.tall-vertikal:first-child{
+    border-top: solid 1px;
+}
+.tall-horisontal{
+    border-right: solid 1px;
+    border-bottom: solid 1px;
+    /* border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    background-image: linear-gradient(to bottom,  white, #263036); */
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    
+    
+    
+
+}
+.tall-horisontal p{
+    line-height: 100%;
+
+}
+
+.tall-horisontal:first-child{
+    border-left: solid 1px;
+}
+
+p{
+    font-size: 4vw;
+    
+
+
+}
+
+#health-container{
+    width: 50vw;
+    max-width: 210px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#health-container .fa-heart{
+    color: rgb(253, 69, 69);
+    font-size: 58px;
+    text-shadow: 0 0 7px #636363;
+}
+
+
+#knapp-boks{
+    display:flex;
+    flex-direction: row;
+}
+
+button{
+    height: 60px;
+    width: 150px;
+    margin: 10px;
+    font-weight: 550;
+    font-size: 20px;
+    border-radius: 30px;
+
+    color: lightgrey;
+    background-color: rgb(79, 0, 0);
+}
+
+@media screen and (min-width: 500px){
+    p{
+        font-size: 16px;
+    }
+
+    /* Trenger bedre losning */
+
+    
+    
+    
+}
+
+@media screen and (max-height: 600px){
+
+    .slider{
+        display: none;
+    }
+
+
+    main{
+        flex-direction: row;
+    }
+
+    header{
+        height: 12.5vh;
+    }
+    header .fa-house{
+        margin-left: 15vw;
+    }
+
+    #score-boxes-container{
+        flex-direction: column;
+        justify-content: space-around;
+
+        width: fit-content;
+        height: 35vh;
+        margin-left: 60px;
+        margin-right: 30px;
+
+    }
+    #score-boxes-container .score-boxes{
+        height: 9.5vh;
+        width: 17vw;
+    }
+    #score-boxes-container .score-boxes p{
+        font-size: 14px;
+    }
+
+    #grid-container{
+        width: 50vw;
+        max-width: 450px;
+        max-height: 420px;
+    }
+
+    #health-container{
+        flex-direction: column;
+        width: fit-content;
+        margin-left: 25px;
+    }
+    #health-container .fa-heart{
+        padding: 10px;
+        font-size: 68px;
+    }
+
+    
+
+}
+
+
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input{
+    opacity:0;
+}
+.slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+
+input:checked + .slider:before {
+
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
