@@ -1,4 +1,4 @@
-let pictureEL = document.querySelectorAll('.image')
+let pictureEL = document.querySelectorAll('img')
 let videoEl = document.querySelectorAll('video')
 
 for (let i = 0; i<pictureEL.length; i++){
