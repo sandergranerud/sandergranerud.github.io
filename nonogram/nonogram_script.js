@@ -1,6 +1,6 @@
 const mainEl = document.querySelector("main")
 
-        let radLength = 5
+        let radLength = 3
 
         const boksContainerEl = document.getElementById("main")
 
@@ -139,7 +139,7 @@ const mainEl = document.querySelector("main")
                 }
 
                 if (tallHorisontals.length === 0){
-                    tallContainerVertikals[i].innerHTML = "0"
+                    tallContainerVertikals[i].innerHTML = "<p> 0 </p>"
                 }
                 else{
                     for (j = 0; j < tallHorisontals.length; j++){
@@ -264,7 +264,7 @@ const mainEl = document.querySelector("main")
 
                         document.body.style.transition = "background-color 1s ease"
                         setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                        setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
+                        setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
                         }
 
                 }
@@ -278,7 +278,7 @@ const mainEl = document.querySelector("main")
 
                     document.body.style.transition = "background-color 1s ease"
                     setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                    setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
+                    setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
 
 
                 }
@@ -316,18 +316,30 @@ const mainEl = document.querySelector("main")
                     
 
                     setTimeout(function() {
-                        mainEl.innerHTML = `<h1>Du tapte dessverre</h1>
-                        <h2>Din streak ble: ${localStorage.nonogramStreak}</h2>
+                        mainEl.innerHTML = `<h1>Du er tom for liv</h1>
+
+                        <i class="fa-solid fa-heart-crack"></i>
+
+                        <h2>Din streak ble: ${localStorage.nonogramStreak} </h2> 
+                        <h2>Prøv på nytt! </h2>
 
                         <div id = "knapp-boks">
-                        <button>Til Forsiden </button>
-                        <button id = "ny-runde-button">Ny Runde </button>
+
+                        <button id = "til-forsiden-button"> Til Forsiden </button>
+                        <button id = "ny-runde-button"> Ny Runde </button>
                         </id>    
                         `
 
                         localStorage.nonogramStreak = 0
 
                         mainEl.style.flexDirection = "column"
+
+                        const tilForsidenButton = document.getElementById("til-forsiden-button")
+
+                        tilForsidenButton.addEventListener("click", function(){
+                            window.location.href = "../index.html"
+
+                        })
 
                         const nyRundeButton = document.getElementById("ny-runde-button")
 
@@ -415,6 +427,7 @@ const mainEl = document.querySelector("main")
 
                     setTimeout(()=> {
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
+                        <i class="fa-solid fa-trophy"></i>
                         <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>
 
                         <button>Ny runde </button>`

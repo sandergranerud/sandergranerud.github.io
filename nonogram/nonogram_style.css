@@ -44,7 +44,7 @@ header{
 }
 
 header .fa-house{
-    color: #282123;
+    color: white;
     font-size: 35px;
 
     padding: 10px;
@@ -66,7 +66,7 @@ header .fa-house{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #282123;
+    background-color: #9d0f0f;
     
     width: 29vw;
     max-width: 160px;
@@ -163,6 +163,7 @@ header .fa-house{
 
 p{
     font-size: 4vw;
+    font-weight: bold;
     
 }
 
@@ -192,21 +193,35 @@ button{
     margin: 10px;
     font-weight: 550;
     font-size: 20px;
+    border: solid white 2px;
     border-radius: 30px;
 
-    color: lightgrey;
+    color: white;
     background-color: rgb(79, 0, 0);
+}
+button:hover{
+    transition: 0.4s;
+    transform: scale(1.1);
+}
+
+.fa-trophy{
+    font-size: 25vh;
+    color: gold;
+}
+.fa-heart-crack{
+    font-size: 30vh;
+    color: #9d0f0f;
+}
+#til-forsiden-button{
+    opacity: 0.85;
+    scale: 0.92;
+    
 }
 
 @media screen and (min-width: 500px){
     p{
         font-size: 16px;
     }
-
-    /* Trenger bedre losning */
-
-    
-    
     
 }
 
@@ -301,7 +316,7 @@ button{
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: rgba(135, 77, 77, 0.882);
 }
 
 
