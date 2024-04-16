@@ -3,11 +3,14 @@
     margin: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+    
+
 }
 
 body{
     height: 100vh;
-    background-color: #be3144ea;
+    background-color: #242222;
+    
     
 }
 
@@ -23,7 +26,7 @@ main{
 }
 
 h2, h1, p{
-    color: #22092C;
+    color: white;
     
 }
 
@@ -33,7 +36,7 @@ header{
     width: 100vw;
     height: 10vh;
 
-    background-color: #22092C;
+    background-color: #9d0f0f;
 
     display: flex;
     justify-content: left;
@@ -41,11 +44,11 @@ header{
 }
 
 header .fa-house{
-    color: #872341;
+    color: #282123;
     font-size: 35px;
 
     padding: 10px;
-    margin-left: 3vw;
+    margin-left: 8vw;
 }
 
 
@@ -63,7 +66,7 @@ header .fa-house{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #22092C;
+    background-color: #282123;
     
     width: 29vw;
     max-width: 160px;
@@ -98,6 +101,9 @@ header .fa-house{
 
 #grid-container{
     grid-template-columns: 1fr 4fr ;
+    grid-gap: 1px;
+    
+
     height: 90vw;
     width: 90vw;
     max-height: 340px;
@@ -151,11 +157,13 @@ header .fa-house{
     border-left: solid 1px;
 }
 
+.boks, .tall-vertikal, .tall-horisontal, .tall-vertikal:first-child, .tall-horisontal:first-child{
+    border-color: white;
+}
+
 p{
     font-size: 4vw;
     
-
-
 }
 
 #health-container{
@@ -167,9 +175,9 @@ p{
 }
 
 #health-container .fa-heart{
-    color: rgb(253, 69, 69);
+    color: rgb(200, 0, 0);
     font-size: 58px;
-    text-shadow: 0 0 7px #636363;
+    text-shadow: 0 0 7px #971919;
 }
 
 
@@ -240,8 +248,9 @@ button{
 
     #grid-container{
         width: 50vw;
+        height: 50vw;
         max-width: 450px;
-        max-height: 420px;
+        max-height: 450px;
     }
 
     #health-container{
