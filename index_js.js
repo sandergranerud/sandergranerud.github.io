@@ -26,19 +26,3 @@ console.log(pictureEL[0].alt)
 /*
 https://www.youtube.com/watch?v=NVy2TO4yL8A/  */
 
- 
-/* for (let i = 0; i<pictureEL.length; i++){
-    if(pictureEL[i].alt == "mines"){
-        console.log("hei")
-    }
-    else if(pictureEL[i].alt == "nonagram"){
-        console.log("hei")
-    }
-    else if(pictureEL[i].alt == "packman"){
-        console.log("hei")
-    }
-    else if(pictureEL[i].alt == "wordle"){
-        console.log("hei")
-    }
-
-}  */
