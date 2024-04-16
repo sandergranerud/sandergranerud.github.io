@@ -74,16 +74,17 @@ header .fa-house{
 
 .score-boxes p{
     color: white;
+    font-weight: bold;
 }
 
 
 .boks{
+    cursor: pointer;
     
-    border-right: solid 1px;
-    border-bottom: solid 1px;
+    border: solid 0.2px;
 
     
-    opacity: 0.7;
+    opacity: 1;
 
     transition: 0.4s;
     
@@ -101,8 +102,6 @@ header .fa-house{
 
 #grid-container{
     grid-template-columns: 1fr 4fr ;
-    grid-gap: 1px;
-    
 
     height: 90vw;
     width: 90vw;
@@ -115,11 +114,6 @@ header .fa-house{
 .tall-vertikal{
     border-bottom: solid 0.2px;
     border-right: solid 0.2px;
-
-    /* border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    
-    background-image: linear-gradient(to right,  white, #263036); */
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -163,12 +157,12 @@ header .fa-house{
 
 p{
     font-size: 4vw;
-    font-weight: bold;
     
 }
 
 #health-container{
     width: 50vw;
+    min-width: 180px;
     max-width: 210px;
 
     display: flex;
@@ -188,13 +182,14 @@ p{
 }
 
 button{
+    cursor: pointer;
     height: 60px;
     width: 150px;
     margin: 10px;
     font-weight: 550;
     font-size: 20px;
     border: solid white 2px;
-    border-radius: 30px;
+    
 
     color: white;
     background-color: rgb(79, 0, 0);
@@ -325,10 +320,3 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}

@@ -1,6 +1,6 @@
 const mainEl = document.querySelector("main")
 
-        let radLength = 3
+        let radLength = 5
 
         const boksContainerEl = document.getElementById("main")
 
@@ -252,7 +252,7 @@ const mainEl = document.querySelector("main")
                 if(aktivBoksCtrl ===  false){
                     if(aktivBoksName === "riktig"){
                         console.log("trykket riktig")
-                        aktivBoksEl.style.backgroundColor = "black"
+                        aktivBoksEl.style.backgroundColor = "#020b17"
                         aktivBoksEl.setAttribute("value", "full")
                     }
                     else if(aktivBoksName === "feil"){
@@ -291,6 +291,8 @@ const mainEl = document.querySelector("main")
                 
 
             }
+
+            aktivBoksEl.style.cursor = "default"
             console.log(`Du har ${liv} liv`)
 
             }
@@ -425,7 +427,12 @@ const mainEl = document.querySelector("main")
                         localStorage.nonogramHighscore = localStorage.nonogramStreak
                     }
 
-                    setTimeout(()=> {
+                    document.body.style.transition = "background-color 1s ease"
+                    setTimeout(function(){document.body.style.backgroundColor = "green"}, 10)
+                    setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
+                        
+
+                    setTimeout(function() {
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
                         <i class="fa-solid fa-trophy"></i>
                         <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>

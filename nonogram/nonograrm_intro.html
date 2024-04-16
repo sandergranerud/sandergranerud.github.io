@@ -16,15 +16,25 @@
 
         main{
             flex-direction: column;
-            background-image: url("../bilder/nonogram_bakgrunn.png") ;
+            background-image: url("../bilder/numbers-background.jpg") ;
+            background-attachment: fixed;
             opacity: 1;
-            height: 100%; 
+
+            height: 120vh;
+            
             background-size: cover;
 
             
         }
+        main div{
+            margin: 10px;
+        }
+        
         #button-container{
             display: flex;
+            justify-content: space-evenly;
+            width: 70vw;
+            
         }
 
         
@@ -50,6 +60,15 @@
         h1, p{
             color: white;
 
+            
+        }
+
+        @media screen and (max-width: 550px){
+            
+            #button-container{
+                flex-direction: column;
+                align-items: center;
+            }
             
         }
 
