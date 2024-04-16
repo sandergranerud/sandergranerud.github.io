@@ -1,6 +1,6 @@
 const mainEl = document.querySelector("main")
 
-        let radLength = 7
+        let radLength = 5
 
         const boksContainerEl = document.getElementById("main")
 
@@ -261,6 +261,10 @@ const mainEl = document.querySelector("main")
                         aktivBoksEl.setAttribute("value", "full")
                         
                         liv-=1
+
+                        document.body.style.transition = "background-color 1s ease"
+                        setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
+                        setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
                         }
 
                 }
@@ -271,6 +275,10 @@ const mainEl = document.querySelector("main")
                     aktivBoksEl.setAttribute("value", "full")
 
                     liv-=1
+
+                    document.body.style.transition = "background-color 1s ease"
+                    setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
+                    setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
 
 
                 }
@@ -307,7 +315,7 @@ const mainEl = document.querySelector("main")
 
                     
 
-                    setTimeout(()=> {
+                    setTimeout(function() {
                         mainEl.innerHTML = `<h1>Du tapte dessverre</h1>
                         <h2>Din streak ble: ${localStorage.nonogramStreak}</h2>
 

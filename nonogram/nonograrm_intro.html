@@ -8,12 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="nonogram_style.css">
 
-    <style>
+    <style>       
+    
+        body{
+            background-color: #351242;
+        }
+
         main{
             flex-direction: column;
+            background-image: url("../bilder/nonogram_bakgrunn.png") ;
+            opacity: 0.5;
+            height: 100%; 
+            background-size: cover;
+
+            
         }
         #button-container{
             display: flex;
+        }
+        h1, #intro-box{
+            background-color: #d12c5e;
+            padding: 15px;
+        }
+
+        #intro-box{
+            max-width: 60vw;
+            padding: 20px;
         }
     </style>
 
@@ -27,14 +47,14 @@
     <main>
         <h1>Nonogram</h1>
         <div id="intro-box">
-            <p>
-                Nonograms er et logisk puslespill. Reglene er enkle. Du har et rutenett med ruter,
+            <p> Nonograms er et logisk puslespill. Reglene er enkle. Du har et rutenett med ruter,
                 som kan fylles med enten en mørk farge eller merkes med en lysere en. 
                 Målet ditt er å fylle alle mørke firkanter. 
                 Ved siden av hver rad og kolonne i rutenettet er det listet opp lengden på løpene med mørke ruter på den raden eller kolonnen.
                 Venstreklikk på en firkant for å fylle den med mørk farge. 
                 For å markere en firkant du ikke vil fylle med mørk farge, må du holde nede Ctrl mens du trykker. 
                 Dersom du spiller på mobiltelefon kan du skru på markering ved hjelp av slideren nederst på siden.
+                <br>
                 <br>
                 Lykke til!
             </p>
