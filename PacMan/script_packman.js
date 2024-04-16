@@ -10,19 +10,6 @@ let startEl = document.querySelector('.start-button')
 let buttonsEls = document.querySelectorAll('.movement')
 
 
-window.addEventListener("load", (event) => {
-    console.log('Page is fully loaded')
-/*     canvasEl.classList.remove('hidden');
-    scoreEl.classList.remove('hidden');
-    for (let i = 0; i<buttonsEls.length;i++){
-        buttonsEls[i].classList.remove('hidden');
-    } */
-
-
-    canvasEl.width = innerWidth
-    canvasEl.height = innerWidth
-
-
     class Boundary {
         static width = 40
         static height = 40
@@ -679,5 +666,3 @@ window.addEventListener("load", (event) => {
         keys.d.pressed = true
         lastKey = 'd'
     })
-
-})
