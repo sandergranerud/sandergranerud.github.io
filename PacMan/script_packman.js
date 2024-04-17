@@ -665,35 +665,35 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
 
         addEventListener('keydown', function({key}){
-            if(key == 'w'){
+            if(key == 'w' || key == "W"){
                 keys.w.pressed = true
                 lastKey = 'w'
             }
-            else if (key == 'a'){
+            else if (key == 'a' || key == "A"){
                 keys.a.pressed = true
                 lastKey = 'a'
             }
-            else if (key == 's'){
+            else if (key == 's' || key == "S"){
                 keys.s.pressed = true
                 lastKey = 's'
             }
-            else if (key == 'd'){
+            else if (key == 'd' || key == "D"){
                 keys.d.pressed = true
                 lastKey = 'd'
             }
         })
 
         addEventListener('keyup', function({key}){
-            if(key == 'w'){
+            if(key == 'w' || key == "W"){
                 keys.w.pressed = false
             }
-            else if (key == 'a'){
+            else if (key == 'a' || key == "A"){
                 keys.a.pressed = false
             }
-            else if (key == 's'){
+            else if (key == 's' || key == "S"){
                 keys.s.pressed = false
             }
-            else if (key == 'd'){
+            else if (key == 'd' || key == "D"){
                 keys.d.pressed = false
             }
         })
