@@ -139,7 +139,7 @@ const mainEl = document.querySelector("main")
                 }
 
                 if (tallHorisontals.length === 0){
-                    tallContainerVertikals[i].innerHTML = "0"
+                    tallContainerVertikals[i].innerHTML = "<p> 0 </p>"
                 }
                 else{
                     for (j = 0; j < tallHorisontals.length; j++){
@@ -252,7 +252,7 @@ const mainEl = document.querySelector("main")
                 if(aktivBoksCtrl ===  false){
                     if(aktivBoksName === "riktig"){
                         console.log("trykket riktig")
-                        aktivBoksEl.style.backgroundColor = "black"
+                        aktivBoksEl.style.backgroundColor = "#020b17"
                         aktivBoksEl.setAttribute("value", "full")
                     }
                     else if(aktivBoksName === "feil"){
@@ -264,7 +264,7 @@ const mainEl = document.querySelector("main")
 
                         document.body.style.transition = "background-color 1s ease"
                         setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                        setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
+                        setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
                         }
 
                 }
@@ -278,7 +278,7 @@ const mainEl = document.querySelector("main")
 
                     document.body.style.transition = "background-color 1s ease"
                     setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                    setTimeout(function(){document.body.style.backgroundColor = "#be3144ea"}, 200)
+                    setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
 
 
                 }
@@ -291,6 +291,8 @@ const mainEl = document.querySelector("main")
                 
 
             }
+
+            aktivBoksEl.style.cursor = "default"
             console.log(`Du har ${liv} liv`)
 
             }
@@ -316,18 +318,30 @@ const mainEl = document.querySelector("main")
                     
 
                     setTimeout(function() {
-                        mainEl.innerHTML = `<h1>Du tapte dessverre</h1>
-                        <h2>Din streak ble: ${localStorage.nonogramStreak}</h2>
+                        mainEl.innerHTML = `<h1>Du er tom for liv</h1>
+
+                        <i class="fa-solid fa-heart-crack"></i>
+
+                        <h2>Din streak ble: ${localStorage.nonogramStreak} </h2> 
+                        <h2>Prøv på nytt! </h2>
 
                         <div id = "knapp-boks">
-                        <button>Til Forsiden </button>
-                        <button id = "ny-runde-button">Ny Runde </button>
+
+                        <button id = "til-forsiden-button"> Til Forsiden </button>
+                        <button id = "ny-runde-button"> Ny Runde </button>
                         </id>    
                         `
 
                         localStorage.nonogramStreak = 0
 
                         mainEl.style.flexDirection = "column"
+
+                        const tilForsidenButton = document.getElementById("til-forsiden-button")
+
+                        tilForsidenButton.addEventListener("click", function(){
+                            window.location.href = "../index.html"
+
+                        })
 
                         const nyRundeButton = document.getElementById("ny-runde-button")
 
@@ -413,8 +427,14 @@ const mainEl = document.querySelector("main")
                         localStorage.nonogramHighscore = localStorage.nonogramStreak
                     }
 
-                    setTimeout(()=> {
+                    document.body.style.transition = "background-color 1s ease"
+                    setTimeout(function(){document.body.style.backgroundColor = "green"}, 10)
+                    setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
+                        
+
+                    setTimeout(function() {
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
+                        <i class="fa-solid fa-trophy"></i>
                         <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>
 
                         <button>Ny runde </button>`

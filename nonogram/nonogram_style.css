@@ -44,7 +44,7 @@ header{
 }
 
 header .fa-house{
-    color: #282123;
+    color: white;
     font-size: 35px;
 
     padding: 10px;
@@ -66,7 +66,7 @@ header .fa-house{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #282123;
+    background-color: #9d0f0f;
     
     width: 29vw;
     max-width: 160px;
@@ -74,16 +74,17 @@ header .fa-house{
 
 .score-boxes p{
     color: white;
+    font-weight: bold;
 }
 
 
 .boks{
+    cursor: pointer;
     
-    border-right: solid 1px;
-    border-bottom: solid 1px;
+    border: solid 0.2px;
 
     
-    opacity: 0.7;
+    opacity: 1;
 
     transition: 0.4s;
     
@@ -101,8 +102,6 @@ header .fa-house{
 
 #grid-container{
     grid-template-columns: 1fr 4fr ;
-    grid-gap: 1px;
-    
 
     height: 90vw;
     width: 90vw;
@@ -115,11 +114,6 @@ header .fa-house{
 .tall-vertikal{
     border-bottom: solid 0.2px;
     border-right: solid 0.2px;
-
-    /* border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    
-    background-image: linear-gradient(to right,  white, #263036); */
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -168,6 +162,7 @@ p{
 
 #health-container{
     width: 50vw;
+    min-width: 180px;
     max-width: 210px;
 
     display: flex;
@@ -187,26 +182,41 @@ p{
 }
 
 button{
+    cursor: pointer;
     height: 60px;
     width: 150px;
     margin: 10px;
     font-weight: 550;
     font-size: 20px;
-    border-radius: 30px;
+    border: solid white 2px;
+    
 
-    color: lightgrey;
+    color: white;
     background-color: rgb(79, 0, 0);
+}
+button:hover{
+    transition: 0.4s;
+    transform: scale(1.1);
+}
+
+.fa-trophy{
+    font-size: 25vh;
+    color: gold;
+}
+.fa-heart-crack{
+    font-size: 30vh;
+    color: #9d0f0f;
+}
+#til-forsiden-button{
+    opacity: 0.85;
+    scale: 0.92;
+    
 }
 
 @media screen and (min-width: 500px){
     p{
         font-size: 16px;
     }
-
-    /* Trenger bedre losning */
-
-    
-    
     
 }
 
@@ -301,7 +311,7 @@ button{
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: rgba(135, 77, 77, 0.882);
 }
 
 
@@ -310,10 +320,3 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
