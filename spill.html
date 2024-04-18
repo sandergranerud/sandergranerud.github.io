@@ -5,216 +5,641 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <style>
+    <style>   /* Prøvde å sortere etter 1. plass i htmlen, 2. clas, 3. stacking av id'er */
+        *{
+            box-sizing: border-box;   /* Passer på at borderne ikke okmmer på utsiden av elementene */
+            color: rgb(220, 225, 215);
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        body{
+            background-color: rgb(30, 45, 36);   /* Ser litt rart ut hvis bakgrunnen utenfor nettsiden bare er hvit, særlig under holderAvAlt*/
+            margin: 0;
+        }
         #holderAvAlt{
+            display: grid;   /* Legger assa alt på nettsiden i dette samme grid oppsettet*/
+            grid-template-columns: repeat(12, 1fr);
+            border-bottom: 4px ridge rgb(165,180,175);
+        }
+        .diverTilGridOppsettet{   /* I tillegg til clasen, navnes disse direct childene av holderAvAlt med "div" først i id'en. De dekker alltid ut plassen tilgjengelig i sin grid-rute*/
+            height: 100%;
+            width: 100%;
+        }
+        #divForBack, #divForOverskrift, #divForLeaderboardKnapp{   /* Headeren av nettsiden, følte det kunne gjøre ting vanskeligere å putte disse i egen div, fordi grid-columnene endres med media quieries*/
+            border-bottom: 4px ridge rgb(200,210,205);
+            background-color: rgb(1, 94, 58);
+        }
+        #back, #leaderboardKnapp{   /* Selve knappene i header */
+            padding: 2% 15%;
+            font-size: 100%;
+            font-weight: 600;
+            color: rgb(40, 75, 50);
+            border: 4px double rgb(140, 170, 148);
+            background-color: rgb(245, 245, 234);
+            box-shadow: 1px 2px 3px black;   /* Gir litt mer "sprett"/spenning i nettsiden, som er gunstig for en spillnetteside */
+        }
+        #divForBack{
+            display: flex;
+            align-items: center;
+            grid-column: 1/4;
+        }
+        #back{
+            margin-left: 7%;
+        }
+        #divForOverskrift{
+            grid-column: 4/10;
+        }
+        #overskrift{
+            color: white;  /* Bedre synlighet på en ganske lys bakgrunn */
+            font-size: 40px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px 40px;
+            border: 5px dotted rgb(235, 240, 225);   /* Passer mines temaet, dottene er liks mines */
+            border-radius: 2px;
+            width: fit-content;
+            margin: 14px auto 15px;
+            background-color: rgb(43, 200, 130);
+            box-shadow: 3px 4px 4px black;
+        }
+        #divForLeaderboardKnapp{
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            grid-column: 10/13;
+        }
+        #leaderboardKnapp{
+            margin-right: 7%;
+        }
+        #divForHolderAvHolderAvTekst{   /* Holder-id'ene blir kanskje litt lange, men de følger også et "rett fram"-typ system */
+            grid-column: 1 / 6;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 110px;
-            margin-right: 4%;
+            background-color: rgb(3, 45, 29);
+            border-right: 5px ridge rgb(165,175,170);
+        }
+        #holderAvHolderAvTekst{
+            display: flex;
+            background-color: rgb(14, 70, 44);
+            border-right: 3px ridge rgb(190, 200, 192);
+            border-left: 3px groove rgb(190,200,200);
+            border-top: 3px groove rgb(190, 200, 200);
+            border-bottom: 3px ridge rgb(200, 200, 200);
+            width: 75%;
+            margin: auto 0 auto 2%;
+            height: 505px;
+            box-shadow: 0 3px 3px 1px black, 0 3px 20px 0 black;
         }
         #holderAvTekst{
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 7%;
+            width: 80%;
+            margin: auto;
         }
-        #betInp{
-            
-        }
-        #bet{
-        }
-        #saldo{
-            margin: 25px auto 20px auto;
-            font-size: 27px;
+        #poengOverskrift{
+            margin: 10px 0px 20px 0px;
+            font-size: 30px;
             font-weight: 600;
-            font-family: Arial, Helvetica, sans-serif
+            width: 100%;
+            color: rgb(255, 253, 253);
+            text-align: center;
+            padding: 23px 15px;
+            border: 2px groove rgb(92, 127, 88);
+            border-radius: 3.5px;
+            background-color: rgb(139, 168, 147);
         }
-        #tilbakeMeld{
-            padding: 8px;
+        #holderAvBetGreiene, #holderAvEarningsOgCashInn{   /* Disse articlene holder forskjellige elementer sammen, gunstig i bruk av flexbox */
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            border: 2px groove rgb(96, 133, 92);
+            border-radius: 4px;
+            background-color: rgb(139, 168, 147);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 17px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 600;
+            color: rgb(0, 85, 55);
+            margin-bottom: 15px; 
         }
-        #restart{
-            display: none;
+        #holderAvBetInputOgPlace{
+            width: 87.8%;
         }
-        #litenInfo{
-            font-size: small;
-            font-style: italic;
-            margin: 0;
+        #place, #betInp, #cashInnOgRestart{
+            font-size: 17px;
+            width: 45%;
+            color: rgb(0, 61, 40);
+            border: 2.5px double rgb(140, 170, 148);
+            background-color: rgb(255, 255, 246);
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 600;
+            border-radius: 3px;
             margin-bottom: 10px;
-
+            box-shadow: 1px 2px 3px black;
+        }
+        #tilbakeMeld, #bet{   /* tilbakeMeld er gevinst-p-elementet og bet er bet-p-elementet */
+            padding: 6px 0;
+            width: 80%;
+            text-align: center;
+            border: 2px ridge rgb(139, 184, 151);
+            border-radius: 3px;
+            color: rgb(58, 86, 60);
+            background-color: rgb(224, 232, 210);
+            margin: 15px 0 20px;
+        }
+        #cashInnOgRestart{
+            width: 80%;
+        }
+        #divForHolderAvSpill{
+            grid-column: 6 / 13;
+            background-color: rgb(0, 22, 17);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
         #holderAvSpill{
             display: grid;
-            grid-template-columns: repeat(5, 65px);
-            gap: 9px;
-            width: fit-content;
+            grid-template-columns: repeat(5, 95px);   /* Spill-oppsettet er altså bare lagd med enkel bruk av grid */
+            margin: 8%;
+            gap: 13px;
         }
-        div{
-            background-color: black;
-            width: 65px;
-            height: 65px;
+        .spillBokser{
+            background-color: rgb(235, 240, 225);
+            width: 95px;
+            height: 95px;
             border-radius: 3.5px;
         }
-        @media(max-width: 700px){
-            #holderAvAlt{
-                flex-direction: column;
-                margin-top: 50px;
-                margin-right: 0;
-            }
-            #mellomrom{
-                display: none;
-            }
+        #divForHolderAvLeaderboard{
+            grid-column: 11 / 13;
+            background-color: rgb(3, 27, 18);
+            display: none;   /* Holder leaderboarden skjult fram til man trykker på knappen */
         }
-        @media(max-width: 410px){
-            div{
-                width: 57px;
-                height: 57px;
+        #holderAvLeaderboard{
+            background-color: rgb(226, 228, 222);
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 6px ridge rgb(220, 225, 215);
+            border-left: 6px groove rgb(220, 225, 215);
+        }
+        #leaderboardOverskrift{
+            font-size: 20px;
+            color: rgb(0, 61, 40);
+            font-weight: 600;
+            margin: 40px auto 15px auto;
+        }
+        #leaderboardListe{
+            width: 95%;
+            font-size: 14px;
+        }
+        .fakeNavn{
+            color: rgb(0, 61, 40);
+            font-weight: 600;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 0 20px 35px 0;
+        }
+        @media(max-width: 1130px){
+            #holderAvTekst{
+                width: 85%;
+            }
+            #holderAvHolderAvTekst{
+                height: 500px;
             }
             #holderAvSpill{
-                grid-template-columns: repeat(5, 57px);
-                gap: 10px;
+                grid-template-columns: repeat(5, 80px);
+            }
+            .spillBokser{
+                height: 80px;
+                width: 80px;
+            }
+            #leaderboardOverskrift{
+                font-size: 15px;
+            }
+            #leaderboardListe{
+                font-size: 11px;
             }
         }
-        @media(max-width: 350px){
-            div{
-                width: 50px;
-                height: 50px;
+        @media(max-width:975px){
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 72px);
+            }
+            .spillBokser{
+                height: 72px;
+                width: 72px;
+            }
+            #holderAvHolderAvTekst{
+                width: 100%;
+                border-right: 0;
+                margin-left: 5%;
+                box-shadow: -5px 0px 20px -8px black;
+                border-top: 0;
+                border-bottom: 0;
+                height:100%;
+            }
+            #leaderboardListe{
+                margin-right: 15px;
+                font-size: 8.5;
+            }
+        }
+        @media(max-width: 880px){
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 62px);
+            }
+            .spillBokser{
+                height: 62px;
+                width: 62px;
+            }
+            #leaderboardListe{
+                font-size: 10px;
+                padding-left: 21px;
+            }
+        }
+        @media(max-width:775px){
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 56px);
+                gap: 10px;
+            }
+            .spillBokser{
+                height: 56px;
+                width: 56px;
+            }
+            #divForBack{
+                grid-column: 1/4;
+            }
+            #divForOverskrift{
+                grid-column: 4/9;
+            }
+            #divForLeaderboardKnapp{
+                grid-column: 9/13;
+            }
+            #leaderboardListe{
+                font-size: 8.5px;
+            }
+            #leaderboardOverskrift{
+                font-size: 13px;
+            }
+        }
+        @media(max-width: 710px){
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 56px);
+                gap: 8px;
+            }
+            .spillBokser{
+                height: 56px;
+                width: 56px;
+            }
+        }
+        @media(max-width:650px){
+            #divForBack, #divForOverskrift, #divForLeaderboardKnapp{
+                border-bottom:0;
+            }
+            #back{  
+                padding: 1% 10%;
+            }
+            #overskrift{
+                font-size: 27px;
+            }
+            #leaderboardKnapp{
+                font-size: 15px;
+                padding: 1% 10%;
             }
             #holderAvSpill{
                 grid-template-columns: repeat(5, 50px);
+                gap: 13px;
+                margin-top: 4%;
+            }
+            .spillBokser{
+                height: 50px;
+                width: 50px;
+            }
+            #divForHolderAvHolderAvTekst{
+                grid-column: 1/13;
+                border-right: 0;
+            }
+            #holderAvHolderAvTekst{
+                height: 330px;
+                margin-left: 0;
+                border: 4px ridge rgb(200, 200, 200);
+            }
+            #holderAvTekst{
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                margin: 0;
+            }
+            #holderAvBetGreiene, #holderAvEarningsOgCashInn, #poengOverskrift{
+                width: 90%;
+                margin: auto;
+            }
+            #holderAvBetGreiene{
+                margin-top: 15px;
+                margin-right: 8%;
+            }
+            #holderAvEarningsOgCashInn{
+                margin-bottom: 15px;
+                margin-right: 8%;
+            }
+            #poengOverskrift{
+                grid-row: 1/3;
+            }
+            #divForHolderAvSpill{
+                grid-column: 1/13;
+            }
+            #divForHolderAvLeaderboard{
+                grid-column: 1 / 13;
+                grid-row: 2 / 3;
+            }
+            #holderAvLeaderboard{
+                padding: 0 30px;
+            }
+            #leaderboardOverskrift{
+                font-size: 25px;
+                margin-top: 20px;
+            }
+            #leaderboardListe{
+                width: fit-content;
+                margin: auto;
+                font-size: 13px;
+            }
+            .fakeNavn{
+                margin: 0 0 16px 0px;
+            }
+        }
+        @media(min-width:501px){
+            #divForBack{
+                grid-row: 1/2;
+            }
+            #divForLeaderboardKnapp{
+                grid-row: 1/2;
+            }
+        }
+        @media(max-width:500px){
+            #divForBack{
+                grid-column: 1/7;
+                grid-row: 2/3;
+            }
+            #back{
+                margin: 15px auto;
+            }
+            #divForOverskrift{
+                grid-column: 1/13;
+                border-bottom: 5px ridge rgb(165,180,175);
+            }
+            #divForLeaderboardKnapp{
+                grid-column: 7/13;
+                grid-row: 2 / 3;
+            }
+            #leaderboardKnapp{
+                margin: 15px auto;
+            }
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 65px);
+                gap: 10px;
+            }
+            .spillBokser{
+                height: 65px;
+                width: 65px;
+            }
+            #divForHolderAvLeaderboard{
+                display: none;
+            }
+        }
+        @media(max-width:410px){
+            #holderAvSpill{
+                grid-template-columns: repeat(5, 54px);
+                gap: 7px;
+            }
+            .spillBokser{
+                height: 54px;
+                width: 54px;
             }
         }
     </style>
 </head>
 <body>
     <main id="holderAvAlt">
-        <article id="holderAvTekst">
-            <p id="saldo">Saldo: </p>
-            <p id="bet">Bet:</p>
-            <article id="holderBetGreieneVedSidenAvHverandre">
-                <input type="number" id="betInp"></input>
-                <button id="place">place</button>
+        <div id="divForBack" class="diverTilGridOppsettet">
+            <button id="back">Back</button>
+        </div>
+        <div id="divForOverskrift" class="diverTilGridOppsettet">
+            <p id="overskrift">M i n e s</p>
+        </div>
+        <div id="divForLeaderboardKnapp" class="diverTilGridOppsettet">
+            <button id="leaderboardKnapp">Leaderboard</button>
+        </div>
+        <div id="divForHolderAvHolderAvTekst" class="diverTilGridOppsettet">
+            <div id="holderAvHolderAvTekst">
+                <article id="holderAvTekst">
+                    <p id="poengOverskrift">Poeng: </p>
+                    <article id="holderAvBetGreiene">
+                        <p id="bet">Bet:</p>
+                        <article id="holderAvBetInputOgPlace">
+                            <input type="number" id="betInp"></input>
+                            <button id="place">Place</button>
+                        </article>
+                    </article>
+                    <article id="holderAvEarningsOgCashInn">
+                        <p id="tilbakeMeld">Gevinst: </p>
+                        <button id="cashInnOgRestart">Cash in</button>
+                    </article>
+                </article>
+            </div>
+        </div>
+        <div id="divForHolderAvSpill" class="diverTilGridOppsettet">
+            <article id="holderAvSpill"></article>
+        </div>
+        <div id="divForHolderAvLeaderboard" class="diverTilGridOppsettet">
+            <article id="holderAvLeaderboard">
+                <p id="leaderboardOverskrift">Leaderboard:</p>
+                <ol id="leaderboardListe"></ol>
             </article>
-            <p id="tilbakeMeld">Earnings: </p>
-            <button id="cashInn">Cash in</button>
-            <button id="restart">Restart</button>
-            <p id="mellomrom"></p>
-            <p></p>
-            <p id="litenInfo">Tips: du kan prøve uten å vedde noe</p>
-        </article>
-        <article id="holderAvSpill">
-        </article>
+        </div>
     </main>
     <script>
+        personerArr = []
+        async function leaderboardF(){
+            for (let i = 0; i < 5; i++) {
+                fetchedUrl = await fetch('https://randomuser.me/api/')
+                data = await fetchedUrl.json()
+                person = data['results'][0]
+                randomScore = Math.floor(Math.random() * 1000) + 8000 - i * 800
+                personsUsernameOgRandomScore = `${person.login.username}: ${randomScore}`
+                personerArr.push(personsUsernameOgRandomScore)
+            }
+            console.log(personerArr)
+            for (let i = 0; i < 5; i++) {
+                fakeNavnEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
+                fakeNavnEl.innerHTML = personerArr[i]
+                fakeNavnEl.classList.add('fakeNavn')
+            }
+        }
+        leaderboardF()
+
+        erLeaderboardKnappTrykket = 0
+        divForLeaderBoardKnappEl = document.getElementById('divForLeaderboardKnapp')
+        leaderboardKnappEl = document.getElementById('leaderboardKnapp')
+        divForBackEl = document.getElementById('divForBack')
+        divForHolderAvHolderAvTekstEl = document.getElementById('divForHolderAvHolderAvTekst')
+        divForHolderAvSpillEl = document.getElementById('divForHolderAvSpill')
+        holderAvSpillEl = document.getElementById('holderAvSpill')
+        divForHolderAvLeaderboardEl = document.getElementById('divForHolderAvLeaderboard')
+
+        leaderboardKnappEl.addEventListener('click',function(){
+            if(erLeaderboardKnappTrykket === 0){
+                divForHolderAvLeaderboardEl.style.display = 'flex'
+                erLeaderboardKnappTrykket = 1
+                if(window.innerWidth > 650){
+                    divForHolderAvSpillEl.style.gridColumn = '5/11'
+                    holderAvSpillEl.style.margin = '8% auto'
+                    divForHolderAvHolderAvTekstEl.style.gridColumnEnd = '5'
+                }
+                else if(window.innerWidth < 500){
+                    divForHolderAvLeaderboardEl.style.gridColumn = '1/13'
+                    divForHolderAvLeaderboardEl.style.gridRow = '2/3'
+                    divForLeaderBoardKnappEl.style.gridRow = '3/4'
+                    divForBack.style.gridRow = '3/4'
+                }
+            }
+            else{
+                divForHolderAvLeaderboardEl.style.display = 'none'
+                erLeaderboardKnappTrykket = 0
+                if(window.innerWidth > 650){
+                    divForHolderAvSpillEl.style.gridColumn = '6/13'
+                    holderAvSpillEl.style.margin = '8%'
+                    divForHolderAvHolderAvTekstEl.style.gridColumnEnd = '6'
+                }
+                else if(window.innerWidth < 500){
+                    divForHolderAvLeaderboardEl.style.gridColumn = '1/13'
+                    divForHolderAvLeaderboardEl.style.gridRow = '2/3'
+                    divForLeaderBoardKnappEl.style.gridRow = '2/3'
+                    divForBack.style.gridRow = '2/3'
+                }
+            }
+        })
+        
+
         bokserArr = []
         for (let i = 0; i < 25; i++) {
             boks = document.getElementById('holderAvSpill').appendChild(document.createElement('div'))
             boks.id = i
+            boks.classList.add('spillBokser')
             bokserArr.push(boks)
         }
 
-        if(localStorage.saldo){
-            saldo = JSON.parse(localStorage.saldo)
+        if(localStorage.poeng){
+            poeng = JSON.parse(localStorage.poeng)
         }else{
-            saldo = 5000
+            poeng = 5000
         }
-        saldoEl = document.getElementById('saldo')
-        saldoEl.innerHTML+=saldo.toFixed(1)+'kr'
+        poengEl = document.getElementById('poengOverskrift')
+        poengEl.innerHTML += poeng.toFixed(1)
 
         place = document.getElementById('place')
         betInp = document.getElementById('betInp')
         bet = document.getElementById('bet')
         tilbakeMeld = document.getElementById('tilbakeMeld')
-        cashInn = document.getElementById('cashInn')
-        restart = document.getElementById('restart')
+        cashInnOgRestart = document.getElementById('cashInnOgRestart')
+        
 
-        function blaKlikk(e){
+        back = document.getElementById('back')
+
+        function blaKlikkF(e){
             e.target.style.backgroundColor = 'blue'
-            gevinst += betSum/25
+            gevinst += betSum / blaCounter
             if(gevinst>=10)
-                tilbakeMeld.innerHTML=`Earnings: ${Math.floor(gevinst)}kr`
+                tilbakeMeld.innerHTML=`Gevinst: ${Math.floor(gevinst)}`
             else if(gevinst<10){
-                tilbakeMeld.innerHTML=`Earnings: ${gevinst.toFixed(1)}kr`
+                tilbakeMeld.innerHTML=`Gevinst: ${gevinst.toFixed(1)}`
             }
-            e.target.removeEventListener('click',blaKlikk)
+            e.target.removeEventListener('click',blaKlikkF)
+            blaCounter-=1
         }
-        function rodKlikk(e){
+        function rodKlikkF(e){
             e.target.style.backgroundColor = 'red'
-            tilbakeMeld.style.border = '1px dashed'
+            tilbakeMeld.style.border = '2px dashed'
             tilbakeMeld.innerHTML = 'Game over'
-            bet.innerHTML = 'Bet: 0kr'
+            bet.innerHTML = 'Bet: 0 poeng'
             betSum = 0
             gevinst = 0
-            restart.style.display = 'inline-block'
-            restart.addEventListener('click', restartF)
-            cashInn.style.display = 'none'
+            cashInnOgRestart.innerHTML = 'Restart'
+            cashInnOgRestart.addEventListener('click', restartF)
             for (let i = 0; i < bokserArr.length; i++) {
-                bokserArr[i].removeEventListener('click', blaKlikk)
+                bokserArr[i].removeEventListener('click', blaKlikkF)
             }
-            randomBoks.removeEventListener('click',rodKlikk)
+            randomBoks.removeEventListener('click',rodKlikkF)
         }
         function restartF(){
             for (let i = 0; i < bokserArr.length; i++) {
-                bokserArr[i].style.backgroundColor = 'black'
+                bokserArr[i].style.backgroundColor = 'rgb(235, 240, 225)'
             }
-            tilbakeMeld.style.border = 'none'
-            tilbakeMeld.innerHTML = 'Earnings: 0kr'
-            bet.innerHTML = 'Bet: 0kr'
+            tilbakeMeld.style.border = '2px ridge rgb(139, 184, 151)'
+            tilbakeMeld.innerHTML = 'Gevinst: '
+            bet.innerHTML = 'Bet: 0 poeng'
             betSum = 0
             gevinst = 0
-            restart.style.display = 'none'
-            cashInn.style.display='inline-block'
+            cashInnOgRestart.innerHTML = 'Cash inn'
+            cashInnOgRestart.removeEventListener('click',restartF)
+            cashInnOgRestart.style.display='inline-block'
             place.style.display = 'inline-block'
             betInp.style.display = 'inline-block'
         }
-        function cashInnF(){
-            saldo += gevinst + betSum
-            saldoEl.innerHTML = `Saldo: ${saldo.toFixed(1)}kr`
+        function cashInnOgRestartF(){
+            poeng += gevinst + betSum
+            poengEl.innerHTML = `Poeng: ${poeng.toFixed(1)}`
             gevinst = 0
             betSum = 0
             for (let i = 0; i < bokserArr.length; i++) {
-                bokserArr[i].removeEventListener('click',blaKlikk)
+                bokserArr[i].removeEventListener('click',blaKlikkF)
             }
-            cashInn.style.display = 'none'
-            randomBoks.removeEventListener('click',rodKlikk)
-            restart.style.display = 'inline-block'
-            restart.addEventListener('click', restartF)
-            localStorage.saldo = saldo
+            randomBoks.removeEventListener('click',rodKlikkF)
+            cashInnOgRestart.innerHTML = 'Restart'
+            cashInnOgRestart.addEventListener('click', restartF)
+            localStorage.poeng = poeng
         }
-
 
         
         place.addEventListener('click',function placeF(){
-            if(betInp.value <= saldo && betInp.value >= 0){
+            if(betInp.value <= poeng && betInp.value >= 0){
                 for (let i = 0; i < bokserArr.length; i++) {
                     bokserArr[i].id = i+1
                 }
                 gevinst = 0
                 betSum = Number(betInp.value)
-                saldo -= betSum
+                poeng -= betSum
                 betInp.value = ''
-                bet.innerHTML=`Bet: ${betSum}kr`
-                betInp.style.display = 'none'
-                place.style.display = 'none'
-                saldoEl.innerHTML=`Saldo: ${saldo.toFixed(1)}kr`
+                bet.innerHTML=`Bet: ${betSum} poeng`
+                
+                poengEl.innerHTML=`Poeng: ${poeng.toFixed(1)}`
 
+                tilbakeMeld.innerHTML = 'Gevinst: '
+
+                blaCounter = 25
                 for (let i = 0; i < bokserArr.length; i++) {
-                    bokserArr[i].addEventListener('click', blaKlikk)
+                    bokserArr[i].addEventListener('click', blaKlikkF)
                 }
 
                 randomId = Math.floor(Math.random()*25+1)
                 randomBoks = document.getElementById(randomId)
                 console.log(randomId)
-                randomBoks.addEventListener('click',rodKlikk)
+                randomBoks.addEventListener('click',rodKlikkF)
                 
-                cashInn.addEventListener('click',cashInnF)
+                cashInnOgRestart.addEventListener('click',cashInnOgRestartF)
             }
             else if(betInp.value<0){
-                tilbakeMeld.innerHTML = 'Bet må være mindre eller lik saldo'
+                tilbakeMeld.innerHTML = 'Bet kan ikke være minus'
             }
             else{
-                tilbakeMeld.innerHTML = 'Bet må være mindre eller lik saldo'
+                tilbakeMeld.innerHTML = 'Bet må være mindre eller lik poeng'
             }
+            
         })
     </script>
 </body>
