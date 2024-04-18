@@ -4,14 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stylesheet_packman.css">
 </head>
 <body>
+    <header>
+        <a href="../index.html">
+        <i class="fa-solid fa-house"></i>
+        </a>
+    </header>
+    <div id="packman-intro">
+        <h1>Packman</h1>
+        <div id="intro-box">
+            <p> Nonograms er et logisk puslespill. Reglene er enkle. Du har et rutenett med ruter,
+                som kan fylles med enten en mørk farge eller merkes med en lysere en. 
+                Målet ditt er å fylle alle mørke firkanter. 
+                Ved siden av hver rad og kolonne i rutenettet er det listet opp lengden på løpene med mørke ruter på den raden eller kolonnen.
+                Venstreklikk på en firkant for å fylle den med mørk farge. 
+                For å markere en firkant du ikke vil fylle med mørk farge, må du holde nede Ctrl mens du trykker. 
+                Dersom du spiller på mobiltelefon kan du skru på markering ved hjelp av slideren nederst på siden.
+                <br>
+                <br>
+                Lykke til!
+            </p>
+        </div>
+        <div id="button-container">
+            <button class="difficultyGrade">Lett</button>
+            <button class="difficultyGrade">Medium</button>
+            <button class="difficultyGrade">Vanskelig</button>
+        </div>
+    </div>
 
     <main>
-<!--         <button class="start-button">Start</button> -->
-        <p class="hidden">
-            <span>Score: </span><span id="scoreEl">0</span>
+
+        <p >
+            <span class="hidden" id="score-text">Score: </span><span id="scoreEl" class="hidden">0</span>
         </p>
         <canvas class="hidden" width="600" height="600"></canvas>
         <div class="buttons" >            

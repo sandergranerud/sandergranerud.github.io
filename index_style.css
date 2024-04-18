@@ -1,21 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
 body {
     background-color: black;
 }
-header {     
- 
-    position: fixed;    
-    background-color: aliceblue;
-    top: 0;
-    left: auto;
-    right: 0;
-    height: 12.5vh;
+header{
     width: 100vw;
+    height: 10vh;
 
+    background-image: linear-gradient(to right, rgb(219, 51, 51), rgb(13, 179, 63), rgb(15, 102, 201));
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
+
+header .fa-house{
+    color: #282123;
+    font-size: 35px;
+
+    padding: 10px;
+    margin-left: 8vw;
+}
+
+
+
+
 main{
-    width: 70vw;
-    height: 70vh;
-    margin: 40px auto;
+    width: 80vw;
+    height: 30vh;
+    margin: 10vh auto;
 
     border-radius: 10px;
     overflow: hidden;
@@ -24,18 +42,22 @@ main{
 
     display: flex;
 
+
+    max-width: 600px;
 }
 
 .picture-container1 { 
     position: relative;
 
-    height: 70vh;
+    height: 30vh;
 }
 
 .picture-container1 a, .picture-container1 a img{
     width: 40vw;
-    height: 70vh;
+    height: 30vh;
     object-fit: cover;
+
+    max-width: 300px;
     
 }
 
@@ -49,9 +71,11 @@ main{
     transform: translate(-50%, -50%);
     opacity: 0;
 
-    height: 70vh;
-    width: 40vw;
+    height: 30vh;
+
     object-fit: cover;
+
+    max-width: 300px;
 }
 
 
@@ -59,7 +83,11 @@ main{
 .smaller-games { 
 
 
-    height: 70vh;
+    height: 30vh;
+}
+
+img {
+    border: solid blue;
 }
 
 .picture-container2, .picture-container3 {
@@ -68,8 +96,11 @@ main{
 
 .smaller-games a, .smaller-games a img{
     width: 40vw;
-    height: 35vh;
+    height: 15vh;
     object-fit: cover;
+
+    max-width: 300px;
+
     
 }
 
@@ -85,9 +116,14 @@ main{
     transform: translate(-50%, -50%);
     opacity: 0;
 
-    height: 300px;
-    width: 40vw;
+
     object-fit: cover;
+
+    max-width: 300px;
 }
 
 
+@media(max-width: 500px){
+
+
+}
