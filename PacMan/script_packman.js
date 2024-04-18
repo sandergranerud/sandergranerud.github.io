@@ -31,7 +31,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
     let scoreAmount
 
     if(difficultyButtonEls[i].innerHTML == 'Lett'){ 
-        playerSpeed = 5
+        playerSpeed = 4
         ghostSpeed = 2
         totalGhosts = 2
         timeGhostScared = 5000
@@ -719,6 +719,10 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         })
 
         }) 
+
+        /* addEventListener('keydown', function(){
+            this.location.reload()
+        }) */
 }
 
 
