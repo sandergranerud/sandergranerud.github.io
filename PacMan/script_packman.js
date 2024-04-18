@@ -73,6 +73,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                 c.drawImage(this.image, this.position.x, this.position.y)
             }
         } 
+
         class Player {
             constructor({ 
                 position, 
@@ -369,6 +370,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         let animationId
 
         function animate() {
+            //Spør nettleser om å kjøre så mange frames som mulig
             animationId = requestAnimationFrame(animate)
             c.clearRect(0,0, canvasEl.width, canvasEl.height)
 
