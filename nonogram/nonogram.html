@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nonogram</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="nonogram_style.css">
+
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+        <i class="fa-solid fa-house"></i>
+        </a>
+    </header>
+    <main>
+        <div id="score-boxes-container">
+            <div id = "streak-box" class="score-boxes"> 
+                <p>Streak: </p>
+            </div>
+            <div id = "highscore-box" class="score-boxes">
+                <p>Highscore: </p>
+            </div>
+        </div>
+
+        <div id = "grid-container" class="grid">
+            <div class="grid-item"></div>
+            <div class="grid-item grid" id="grid-container-horisontal" ></div>
+            <div class="grid-item grid"id ="grid-container-vertikal" class="grid"></div>
+            <div class="grid" id="main"> </div>
+
+        </div>
+
+        
+        <div id="health-container">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart"></i>
+
+        </div>
+
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+
+
+    </main>
+
+    <script src="nonogram_script.js"> 
+    </script>
+</body>
+</html>

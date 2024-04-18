@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro nonogram</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="nonogram_style.css">
+
+    <style>       
+    
+        body{
+            background-color: #242222;
+        }
+
+        main{
+            flex-direction: column;
+            background-image: url("../bilder/numbers-background.jpg") ;
+            background-attachment: fixed;
+            opacity: 1;
+
+            height: 120vh;
+            
+            background-size: cover;
+
+            
+        }
+        main div{
+            margin: 10px;
+        }
+        
+        #button-container{
+            display: flex;
+            justify-content: space-evenly;
+            width: 70vw;
+            
+        }
+
+        
+        
+        p{
+            font-weight: 600;
+        
+        }
+
+        
+
+        h1, #intro-box{
+            background-color: #242222;
+            padding: 20px;
+        }
+
+        #intro-box{
+            max-width: 60vw;
+            padding: 25px;
+   
+        }
+
+        h1, p{
+            color: white;
+
+            
+        }
+
+        @media screen and (max-width: 550px){
+            
+            #button-container{
+                flex-direction: column;
+                align-items: center;
+            }
+            
+        }
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+        <i class="fa-solid fa-house"></i>
+        </a>
+    </header>
+    <main>
+        <h1>Nonogram</h1>
+        <div id="intro-box">
+            <p> Nonograms er et logisk puslespill. Reglene er enkle. Du har et rutenett med ruter,
+                som kan fylles med enten en mørk farge eller merkes med en lysere en. 
+                Målet ditt er å fylle alle mørke firkanter. 
+                Ved siden av hver rad og kolonne i rutenettet er det listet opp lengden på løpene med mørke ruter på den raden eller kolonnen.
+                Venstreklikk på en firkant for å fylle den med mørk farge. 
+                For å markere en firkant du ikke vil fylle med mørk farge, må du holde nede Ctrl mens du trykker. 
+                Dersom du spiller på mobiltelefon kan du skru på markering ved hjelp av slideren nederst på siden.
+                <br>
+                <br>
+                Lykke til!
+            </p>
+        </div>
+        <div id="button-container">
+            <button>Lett</button>
+            <button>Medium</button>
+            <button>Vanskelig</button>
+        </div>
+    </main>
+
+</body>
