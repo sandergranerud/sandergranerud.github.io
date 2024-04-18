@@ -21,6 +21,7 @@
             opacity: 1;
 
             height: 120vh;
+            width: 100vw;
             
             background-size: cover;
 
@@ -97,10 +98,29 @@
             </p>
         </div>
         <div id="button-container">
-            <button>Lett</button>
-            <button>Medium</button>
-            <button>Vanskelig</button>
+            <button id="lett">Lett</button>
+            <button id="medium">Medium</button>
+            <button id="vanskelig">Vanskelig</button>
         </div>
     </main>
+
+    <script>
+
+        const vanskelighetsgradButtonEls = document.querySelectorAll("button")
+
+        function finnVerdi(e){
+            console.log(e.target.id)
+            localStorage.vanskelighetsgrad = e.target.id
+
+            console.log(localStorage.vanskelighetsgrad)
+
+            window.location.href = "nonogram.html"
+        }
+
+        for (i = 0; i < vanskelighetsgradButtonEls.length; i++){
+            vanskelighetsgradButtonEls[i].addEventListener("click", finnVerdi)
+        }
+
+    </script>
 
 </body>

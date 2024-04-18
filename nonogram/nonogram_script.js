@@ -1,6 +1,19 @@
 const mainEl = document.querySelector("main")
 
-        let radLength = 5
+        let radLength
+        
+
+        if(localStorage.vanskelighetsgrad === "lett"){
+            radLength = 3  
+
+        }else if(localStorage.vanskelighetsgrad === "medium"){
+            radLength = 5
+        }else if(localStorage.vanskelighetsgrad === "vanskelig"){
+            radLength = 10
+        }
+
+        const headerEl = document.querySelector("header")
+        
 
         const boksContainerEl = document.getElementById("main")
 

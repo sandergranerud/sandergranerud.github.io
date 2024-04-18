@@ -39,7 +39,7 @@ header{
     background-color: #9d0f0f;
 
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -50,7 +50,6 @@ header .fa-house{
     padding: 10px;
     margin-left: 8vw;
 }
-
 
 
 #score-boxes-container{
