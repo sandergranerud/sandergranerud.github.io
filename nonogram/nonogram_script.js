@@ -1,6 +1,41 @@
 const mainEl = document.querySelector("main")
 
-        let radLength = 5
+        let radLength
+        
+
+        if(localStorage.vanskelighetsgrad === "lett"){
+            radLength = 3  
+            if(!localStorage.nonogramStreakLett){
+                nonogramStreak = 0
+                nonogramHighscore = 0
+            }else{
+                nonogramStreak = localStorage.nonogramStreakLett
+                nonogramHighscore = localStorage.nonogramHighscoreLett
+            }
+        }else if(localStorage.vanskelighetsgrad === "medium"){
+            radLength = 5
+            if(!localStorage.nonogramStreakMedium){
+                nonogramStreak = 0
+                nonogramHighscore = 0
+            }else{
+                nonogramStreak = localStorage.nonogramStreakMedium
+                nonogramHighscore = localStorage.nonogramHighscoreMedium
+            }
+
+            
+        }else if(localStorage.vanskelighetsgrad === "vanskelig"){
+            radLength = 10
+            if(!localStorage.nonogramStreakVanskelig){
+                nonogramStreak = 0
+                nonogramHighscore = 0
+            }else{
+                nonogramStreak = localStorage.nonogramStreakVanskelig
+                nonogramHighscore = localStorage.nonogramHighscoreVanskelig
+            }
+        }
+
+        const headerEl = document.querySelector("header")
+        
 
         const boksContainerEl = document.getElementById("main")
 
@@ -9,12 +44,12 @@ const mainEl = document.querySelector("main")
         const streakEl = document.getElementById("streak-box")
         const highscoreEl = document.getElementById("highscore-box")
 
-        if(!localStorage.nonogramStreak){
-            localStorage.nonogramStreak = 0
-            localStorage.nonogramHighscore = 0
+        if(!nonogramStreak){
+            nonogramStreak = 0
+            nonogramHighscore = 0
         }
-        streakEl.innerHTML = `<p>Streak: ${localStorage.nonogramStreak}</p>`
-        highscoreEl.innerHTML = `<p>Highscore: ${localStorage.nonogramHighscore}</p>`
+        streakEl.innerHTML = `<p>Streak: ${nonogramStreak}</p>`
+        highscoreEl.innerHTML = `<p>Highscore: ${nonogramHighscore}</p>`
 
         // Lager den horisontale og vertikale boksen som inneholder mindre bokser med tall
     
@@ -214,6 +249,10 @@ const mainEl = document.querySelector("main")
 
             }
 
+            //Funksjon som setter streak og highscore avhengig av vanskelighetsgraf
+
+            
+
             //Sjekker om markering er på
 
             const inputEl = document.querySelector("input")
@@ -224,6 +263,19 @@ const mainEl = document.querySelector("main")
             aktiv += 1
             console.log(aktiv)
             })
+
+            function setteStreakogHs(){
+                if(localStorage.vanskelighetsgrad === "lett"){
+                    localStorage.nonogramStreakLett = nonogramStreak
+                    localStorage.nonogramHighscoreLett = nonogramHighscore
+                }else if(localStorage.vanskelighetsgrad === "medium"){
+                    localStorage.nonogramStreakMedium = nonogramStreak
+                    localStorage.nonogramHighscoreMedium = nonogramHighscore
+                }else if(localStorage.vanskelighetsgrad === "vanskelig"){
+                    localStorage.nonogramStreakVanskelig = nonogramStreak
+                    localStorage.nonogramHighscoreVanskelig = nonogramHighscore
+                }
+            }
 
 
 
@@ -311,8 +363,8 @@ const mainEl = document.querySelector("main")
                 if (liv === 0){
                     heartEls[2].style.opacity = 0.2
 
-                    if(localStorage.nonogramStreak>localStorage.nonogramHighscore){
-                        nonogramHighscore = nonogramStreak
+                    if(nonogramStreak>nonogramHighscore){
+                        nonogramHighscore = nonogramStreak   
                     }
 
                     
@@ -322,7 +374,7 @@ const mainEl = document.querySelector("main")
 
                         <i class="fa-solid fa-heart-crack"></i>
 
-                        <h2>Din streak ble: ${localStorage.nonogramStreak} </h2> 
+                        <h2>Din streak ble: ${nonogramStreak} </h2> 
                         <h2>Prøv på nytt! </h2>
 
                         <div id = "knapp-boks">
@@ -332,7 +384,9 @@ const mainEl = document.querySelector("main")
                         </id>    
                         `
 
-                        localStorage.nonogramStreak = 0
+                        nonogramStreak = 0
+
+                        
 
                         mainEl.style.flexDirection = "column"
 
@@ -345,11 +399,15 @@ const mainEl = document.querySelector("main")
 
                         const nyRundeButton = document.getElementById("ny-runde-button")
 
+                        setteStreakogHs()
+
                         nyRundeButton.addEventListener("click", function(){
                             location.reload()
                         })
                     }
                     , 700)
+
+                    
 
 
                 }
@@ -421,10 +479,10 @@ const mainEl = document.querySelector("main")
                 if (ferdig === true){
                     console.log("Du har vunnet")
 
-                    localStorage.nonogramStreak = Number(localStorage.nonogramStreak) + 1
+                    nonogramStreak = Number(nonogramStreak) + 1
 
-                    if(localStorage.nonogramStreak>localStorage.nonogramHighscore){
-                        localStorage.nonogramHighscore = localStorage.nonogramStreak
+                    if(nonogramStreak>nonogramHighscore){
+                        nonogramHighscore = nonogramStreak
                     }
 
                     document.body.style.transition = "background-color 1s ease"
@@ -435,13 +493,15 @@ const mainEl = document.querySelector("main")
                     setTimeout(function() {
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
                         <i class="fa-solid fa-trophy"></i>
-                        <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>
+                        <h2>Din streak er nå: ${nonogramStreak}</h2>
 
                         <button>Ny runde </button>`
 
                         mainEl.style.flexDirection = "column"
 
                         const nyRundeButton = document.querySelector("button")
+
+                        setteStreakogHs()
 
                         nyRundeButton.addEventListener("click", function(){
                             location.reload()
@@ -466,6 +526,10 @@ const mainEl = document.querySelector("main")
                 hearts(e)
                 fullClass(aktivBoksEl)
                 ferdig()
+
+                
+
+                
 
             }
 
