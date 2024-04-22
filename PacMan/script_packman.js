@@ -6,7 +6,6 @@ let difficultyButtonEls = document.querySelectorAll('.difficultyGrade')
 
 
 
-
 for (let i = 0; i<difficultyButtonEls.length;i++){
     difficultyButtonEls[i].addEventListener('click', function(){
         introEl.style.display = 'none'        
@@ -27,6 +26,8 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         }
         
 
+
+    console.log(localStorage.teller)
 
     let playerSpeed 
     let ghostSpeed 
@@ -52,7 +53,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         playerSpeed = 4
         ghostSpeed = 4
         totalGhosts = 5
-        timeGhostScared = 3000
+        timeGhostScared = 4000
         scoreAmount = 20
     }
 
@@ -498,12 +499,18 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                                 </id>    
                                 `
         
-                                localStorage.nonogramStreak = 0
-        
                                 mainEl.style.justifyContent = "space-evenly"
                                 mainEl.style.height = "89vh"
 
         
+                                if (!localStorage.teller){
+                                    localStorage.teller = 1
+                                }
+                                else{
+                                    localStorage.teller = Number(localStorage.teller) + score
+                                }
+                                console.log(localStorage.teller)
+
                                 const tilForsidenButton = document.getElementById("til-forsiden-button")
         
                                 tilForsidenButton.addEventListener("click", function(){
@@ -534,7 +541,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                 setTimeout(function() {
                     mainEl.innerHTML = `<h1>Du klarte det!</h1>
                     <i class="fa-solid fa-trophy"></i>
-                    <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>
+                    <h2>Din score ble: ${score}</h2>
 
                     <div id = "knapp-boks">
         
@@ -545,6 +552,14 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
                     mainEl.style.justifyContent = "space-evenly"
                     mainEl.style.height = "89vh"
+
+                    if (!localStorage.teller){
+                        localStorage.teller = 1
+                    }
+                    else{
+                        localStorage.teller = Number(localStorage.teller) + score
+                    }
+                    console.log(localStorage.teller)
 
                     const tilForsidenButton = document.getElementById("til-forsiden-button")
         
