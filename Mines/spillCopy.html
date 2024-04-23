@@ -24,6 +24,9 @@
             height: 100%;
             width: 100%;
         }
+        button:hover{ 
+            background-color: yellow;
+        }
         #divForBack, #divForOverskrift, #divForLeaderboardKnapp{   /* Headeren av nettsiden, følte det kunne gjøre ting vanskeligere å putte disse i egen div, fordi grid-columnene endres med media quieries*/
             border-bottom: 4px ridge rgb(200,210,205);
             background-color: rgb(1, 94, 58);
@@ -100,7 +103,15 @@
         }
         #poengOverskrift{
             margin: 10px 0px 20px 0px;
-            font-size: 30px;
+            font-size: 28px;
+            font-weight: 600;
+            width: 100%;
+            color: rgb(255, 253, 253);
+            text-align: center;
+            padding: 23px 15px;
+            border: 2px groove rgb(92, 127, 88);
+            border-radius: 3.5px;
+            background-color: rgb(139, 168, 147);
         }
 
         #holderAvBetGreiene, #holderAvEarningsOgCashInn{   /* Disse articlene holder forskjellige elementer sammen, gunstig i bruk av flexbox */
@@ -158,7 +169,7 @@
         }
         #holderAvSpill{
             display: grid;
-            grid-template-columns: repeat(5, 95px);   /* Spill-oppsettet er altså bare lagd med enkel bruk av grid */
+            grid-template-columns: repeat(5, 95px);   /* Spill-kvadratet er altså bare lagd med enkel bruk av grid */
             margin: 8%;
             gap: 13px;
         }
@@ -167,10 +178,16 @@
             width: 95px;
             height: 95px;
             border-radius: 3.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120%;
+            color: rgb(43, 200, 130);
+            font-weight: 700;
         }
         #divForHolderAvLeaderboard{
             grid-column: 11 / 13;
-            background-color: rgb(3, 27, 18);
+            background-color: rgb(0, 22, 17);
             display: none;   /* Holder leaderboarden skjult fram til man trykker på knappen */
         }
         #holderAvLeaderboard{
@@ -193,7 +210,7 @@
             width: 95%;
             font-size: 14px;
         }
-        .fakeNavn{
+        .leaderboardNavn{   /* De forskjellige personene på leaderboarden */
             color: rgb(0, 61, 40);
             font-weight: 600;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -206,7 +223,7 @@
             #holderAvHolderAvTekst{
                 height: 500px;
             }
-            #holderAvSpill{
+            #holderAvSpill{   /* Jeg kunne kanskje erklkært strørrelsene til spillboksene med prosent, men syns det var lettere med px og media quieries */
                 grid-template-columns: repeat(5, 80px);
             }
             .spillBokser{
@@ -238,7 +255,7 @@
                 height:100%;
             }
             #leaderboardListe{
-                margin-right: 15px;
+                margin-right: 15px;   /* Så teksten ikke går inn i høyre vegg */
                 font-size: 8.5;
             }
         }
@@ -251,7 +268,7 @@
                 width: 62px;
             }
             #leaderboardListe{
-                font-size: 10px;
+                font-size: 10px;   /* Syns det var lettere med media quieries */
                 padding-left: 21px;
             }
         }
@@ -264,6 +281,7 @@
                 height: 56px;
                 width: 56px;
             }
+            /* Endret på disse pga leaderboardknappen tok mye plass i "headeren" */
             #divForBack{
                 grid-column: 1/4;
             }
@@ -273,6 +291,7 @@
             #divForLeaderboardKnapp{
                 grid-column: 9/13;
             }
+
             #leaderboardListe{
                 font-size: 8.5px;
             }
@@ -305,13 +324,13 @@
                 padding: 1% 10%;
             }
             #holderAvSpill{
-                grid-template-columns: repeat(5, 50px);
+                grid-template-columns: repeat(5, 70px);
                 gap: 13px;
                 margin-top: 4%;
             }
             .spillBokser{
-                height: 50px;
-                width: 50px;
+                height: 70px;
+                width: 70px;
             }
             #divForHolderAvHolderAvTekst{
                 grid-column: 1/13;
@@ -362,16 +381,8 @@
                 margin: auto;
                 font-size: 13px;
             }
-            .fakeNavn{
+            .leaderboardNavn{
                 margin: 0 0 16px 0px;
-            }
-        }
-        @media(min-width:501px){
-            #divForBack{
-                grid-row: 1/2;
-            }
-            #divForLeaderboardKnapp{
-                grid-row: 1/2;
             }
         }
         @media(max-width:500px){
@@ -418,9 +429,10 @@
     </style>
 </head>
 <body>
+    <!-- det meste her står beskrevet i css -->
     <main id="holderAvAlt">
         <div id="divForBack" class="diverTilGridOppsettet">
-            <button id="back">Back</button>
+            <button id="back" class="knapp">Back</button>
         </div>
         <div id="divForOverskrift" class="diverTilGridOppsettet">
             <p id="overskrift">M i n e s</p>
@@ -452,31 +464,19 @@
         <div id="divForHolderAvLeaderboard" class="diverTilGridOppsettet">
             <article id="holderAvLeaderboard">
                 <p id="leaderboardOverskrift">Leaderboard:</p>
-                <ol id="leaderboardListe"></ol>
+                <ol id="leaderboardListe"></ol>   <!-- Er altså en "oppsetter" til de fake navnene fra api'en -->
             </article>
         </div>
     </main>
     <script>
-        personerArr = []
-        async function leaderboardF(){
-            for (let i = 0; i < 5; i++) {
-                fetchedUrl = await fetch('https://randomuser.me/api/')
-                data = await fetchedUrl.json()
-                person = data['results'][0]
-                randomScore = Math.floor(Math.random() * 1000) + 8000 - i * 800
-                personsUsernameOgRandomScore = `${person.login.username}: ${randomScore}`
-                personerArr.push(personsUsernameOgRandomScore)
-            }
-            console.log(personerArr)
-            for (let i = 0; i < 5; i++) {
-                fakeNavnEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
-                fakeNavnEl.innerHTML = personerArr[i]
-                fakeNavnEl.classList.add('fakeNavn')
-            }
-        }
-        leaderboardF()
-
-        erLeaderboardKnappTrykket = 0
+        /* Definerer nødvendige elementer */
+        poengEl = document.getElementById('poengOverskrift')
+        place = document.getElementById('place')
+        betInp = document.getElementById('betInp')
+        bet = document.getElementById('bet')
+        tilbakeMeld = document.getElementById('tilbakeMeld')
+        cashInnOgRestart = document.getElementById('cashInnOgRestart')
+        back = document.getElementById('back')
         divForLeaderBoardKnappEl = document.getElementById('divForLeaderboardKnapp')
         leaderboardKnappEl = document.getElementById('leaderboardKnapp')
         divForBackEl = document.getElementById('divForBack')
@@ -485,16 +485,69 @@
         holderAvSpillEl = document.getElementById('holderAvSpill')
         divForHolderAvLeaderboardEl = document.getElementById('divForHolderAvLeaderboard')
 
+
+        /* Poeng */
+        if(localStorage.poeng){   /* Sjekker om spillet har blitt kjørt på pcen før og henter evt scoren fra localStorage */
+            poeng = JSON.parse(localStorage.poeng)
+        }else{
+            poeng = 1000   /* Hvis det er første gang, starter du med 1000 poeng */
+        }
+        poengEl.innerHTML += poeng.toFixed(1)   /* Passer på at det står riktig poengsum ved åpning av spillet */
+
+
+        /* Laging av spillbokser */
+        bokserArr = []
+        for (let i = 0; i < 25; i++) {
+            boks = document.getElementById('holderAvSpill').appendChild(document.createElement('div'))   /* Lager boksene inni diven #holderAvSpill*/
+            boks.id = i   /* Gjør at jeg kan identifisere boksene */
+            boks.classList.add('spillBokser')
+            bokserArr.push(boks)
+        }
+
+
+        /* Laging av leaderboard: */
+        leaderboardLiArr = []   /* Array med de 5 fake personene og evt spilleren */
+        leaderboardPersonerArr = []  /* Arry med de 5 liste elementene som vises på skjermen */
+        async function leaderboardF(){
+            for (let i = 0; i < 5; i++) {
+                fetchedUrl = await fetch('https://randomuser.me/api/')   /* Fant på https://apipheny.io/free-api/ */
+                data = await fetchedUrl.json()   /* Promice om å gjøre informasjonen til json format */
+                randomNavn = data['results'][0]   /* Informasjon om fake enkeltperson */
+                randomScore = Math.floor(Math.random() * 8000) + 4000   /* Random score fra 4 til 12000 */
+                fakePerson = {navn: randomNavn, score: randomScore}
+                leaderboardPersonerArr.push(fakePerson)   /* lager objekter av de 5 fake personene */
+            }
+            /* Sorterer personerArr og gjør at du kommer opp på leaderboarden hvis du har høy nok score */
+            /* DE TO UNDER SKAL IVERKSETTES ETTER DEN FØRSTE FOR LØKKA, MEN TRENGER IKKE VÆRE ASYNC, HVORDA GJØR MAN DET */
+            leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+            if(poeng > leaderboardPersonerArr[4].score){
+                spiller = {navn: 'you', score: poeng}
+                leaderboardPersonerArr.push(spiller)
+                leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+            }
+            /* Lager leaderboarden riktig */
+            for (let i = 0; i < 5; i++) {   /* ...og legges inn i leaderboarden i nylagde liste-elementer med klassen "leaderboardNavn" */
+                leaderboardLiEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
+                leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+                leaderboardLiEl.classList.add('leaderboardLiClass')
+                leaderboardLiArr[i].push(leaderboardLiEl)
+            }
+        }
+        leaderboardF()
+
+
+        /* Åpning og lukking av leaderboard */
+        erLeaderboardKnappTrykket = 0   /* Gjør at samme knapp kan benyttes til åpning og lukking av leaderboard */
         leaderboardKnappEl.addEventListener('click',function(){
             if(erLeaderboardKnappTrykket === 0){
-                divForHolderAvLeaderboardEl.style.display = 'flex'
+                divForHolderAvLeaderboardEl.style.display = 'flex'   /* Gjør leaderboarden synlig */
                 erLeaderboardKnappTrykket = 1
-                if(window.innerWidth > 650){
+                if(window.innerWidth > 650){   /* For når leaderboarden skal poppe opp på høyre side a skjerm */
                     divForHolderAvSpillEl.style.gridColumn = '5/11'
                     holderAvSpillEl.style.margin = '8% auto'
                     divForHolderAvHolderAvTekstEl.style.gridColumnEnd = '5'
                 }
-                else if(window.innerWidth < 500){
+                else if(window.innerWidth < 500){   /* For når leaderboard skal poppe opp over tekst/knapp-feltet */
                     divForHolderAvLeaderboardEl.style.gridColumn = '1/13'
                     divForHolderAvLeaderboardEl.style.gridRow = '2/3'
                     divForLeaderBoardKnappEl.style.gridRow = '3/4'
@@ -502,7 +555,8 @@
                 }
             }
             else{
-                divForHolderAvLeaderboardEl.style.display = 'none'
+                /* Elementene puttes på plass der de var førman trykket leaderboardknappen */
+                divForHolderAvLeaderboardEl.style.display = 'none'   /* Tar bort leaderboard */
                 erLeaderboardKnappTrykket = 0
                 if(window.innerWidth > 650){
                     divForHolderAvSpillEl.style.gridColumn = '6/13'
@@ -517,114 +571,110 @@
                 }
             }
         })
-        
 
-        bokserArr = []
-        for (let i = 0; i < 25; i++) {
-            boks = document.getElementById('holderAvSpill').appendChild(document.createElement('div'))
-            boks.id = i
-            boks.classList.add('spillBokser')
-            bokserArr.push(boks)
-        }
 
-        if(localStorage.poeng){
-            poeng = JSON.parse(localStorage.poeng)
-        }else{
-            poeng = 5000
-        }
-        poengEl = document.getElementById('poengOverskrift')
-        poengEl.innerHTML += poeng.toFixed(1)
-
-        place = document.getElementById('place')
-        betInp = document.getElementById('betInp')
-        bet = document.getElementById('bet')
-        tilbakeMeld = document.getElementById('tilbakeMeld')
-        cashInnOgRestart = document.getElementById('cashInnOgRestart')
-        
-
-        back = document.getElementById('back')
-
-        function blaKlikkF(e){
-            e.target.style.backgroundColor = 'blue'
-            gevinst += betSum / blaCounter
+        /* Definerer funksjoner som driver spillet */
+        function gronnKlikkF(e){   /* Når et element som ikke var det røde bombe-elementet klikkes */
+            e.target.style.backgroundColor = 'rgb(43, 200, 130)'
+            gevinst += betSum / gronnCounter   /* Gevinst økes med summen man veddet delt på hvor mange ruter det var igjen, så gevinsten du får multipliseres etter hvor mange ruter du trykker */
+            for (let i = 0; i < 25; i++) {   /* Gjør at mengde poeng man vil få på å klikke den neste boksen står på de resterende boksene */
+                bokserArr[i].innerHTML = (betSum / (gronnCounter-1)).toFixed(2)
+            }
+            /* if-testen nedenfor gjør at man bare får et desimaltall bak gevinstsummen hvis den er under 10 poeng*/
             if(gevinst>=10)
                 tilbakeMeld.innerHTML=`Gevinst: ${Math.floor(gevinst)}`
             else if(gevinst<10){
                 tilbakeMeld.innerHTML=`Gevinst: ${gevinst.toFixed(1)}`
             }
-            e.target.removeEventListener('click',blaKlikkF)
-            blaCounter-=1
+            e.target.removeEventListener('click',gronnKlikkF)   /* Gjør at de grønne boksene ikke kan klikkes på flere ganger */
+            gronnCounter -= 1   /* Sjekker hvor mange ruter det er igjen */
         }
-        function rodKlikkF(e){
+
+        function rodKlikkF(e){   /* Når det røde bombe-elementet klikkes */
             e.target.style.backgroundColor = 'red'
+            for (let i = 0; i < 25; i++) {   /* Passer på at poengene på bombene tas bort */
+                bokserArr[i].innerHTML = ''
+            }
             tilbakeMeld.style.border = '2px dashed'
             tilbakeMeld.innerHTML = 'Game over'
-            bet.innerHTML = 'Bet: 0 poeng'
-            betSum = 0
+            bet.innerHTML = 'Bet: 0 poeng'   /* Resetter bet elementet */
+            place.removeEventListener('click', placeF)   /* Gjør at man ikke kan starte igjen før man trykker retry */
+            betSum = 0   
             gevinst = 0
             cashInnOgRestart.innerHTML = 'Restart'
-            cashInnOgRestart.addEventListener('click', restartF)
+            cashInnOgRestart.addEventListener('click', restartF)   /* Gjør knappen klar til å iverksette restart-funksjonen */
             for (let i = 0; i < bokserArr.length; i++) {
-                bokserArr[i].removeEventListener('click', blaKlikkF)
+                bokserArr[i].removeEventListener('click', gronnKlikkF)
             }
-            randomBoks.removeEventListener('click',rodKlikkF)
+            randomBoks.removeEventListener('click',rodKlikkF) /* Gjør at den røde bombe-boksene ikke kan klikkes på flere ganger */
         }
-        function restartF(){
-            for (let i = 0; i < bokserArr.length; i++) {
+
+        function restartF(){   /* Når restart trykkes */
+            for (let i = 0; i < bokserArr.length; i++) {   /* Resetter farger på bokser */
                 bokserArr[i].style.backgroundColor = 'rgb(235, 240, 225)'
             }
-            tilbakeMeld.style.border = '2px ridge rgb(139, 184, 151)'
+            tilbakeMeld.style.border = '2px ridge rgb(139, 184, 151)'   /* Resetter border fra å være dashed */
             tilbakeMeld.innerHTML = 'Gevinst: '
             bet.innerHTML = 'Bet: 0 poeng'
             betSum = 0
             gevinst = 0
             cashInnOgRestart.innerHTML = 'Cash inn'
             cashInnOgRestart.removeEventListener('click',restartF)
-            cashInnOgRestart.style.display='inline-block'
-            place.style.display = 'inline-block'
-            betInp.style.display = 'inline-block'
+            place.addEventListener('click', placeF)
         }
-        function cashInnOgRestartF(){
-            poeng += gevinst + betSum
+
+        function cashInnF(){   /* Når cash inn trykkes */
+            poeng += gevinst + betSum   /* Casher inn summen man vedda pluss eventuelle gevinster */
             poengEl.innerHTML = `Poeng: ${poeng.toFixed(1)}`
+            place.removeEventListener('click', placeF)   
             gevinst = 0
             betSum = 0
             for (let i = 0; i < bokserArr.length; i++) {
-                bokserArr[i].removeEventListener('click',blaKlikkF)
+                bokserArr[i].removeEventListener('click',gronnKlikkF)
+                bokserArr[i].innerHTML = ''   /* Er med vilje at jeg ikke fjerner grønnfargen før restart */
             }
             randomBoks.removeEventListener('click',rodKlikkF)
             cashInnOgRestart.innerHTML = 'Restart'
             cashInnOgRestart.addEventListener('click', restartF)
-            localStorage.poeng = poeng
+            localStorage.poeng = poeng   /* Updater poengsum i local storage */
+
+            /* Updater leaderboarden */
+            if(poeng > leaderboardPersonerArr[4].score){
+                if(!leaderboardLiArr.includes(li.spiller)){   /* TROR IKKKE DETTE FUNKER, FINNES DET EN BEDRE MÅTE Å IDENTIFISERE */
+                    spiller = {navn: 'you', score: poeng}
+                    leaderboardPersonerArr.push(spiller)
+                }
+                leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+                leaderboardArr = []
+                for (let i = 0; i < 5; i++) {
+                    leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+                    leaderboardLiArr[i].push(leaderboardLiEl)
+                }
+            }   
         }
 
-        
-        place.addEventListener('click',function placeF(){
-            if(betInp.value <= poeng && betInp.value >= 0){
+        function placeF(){
+            if(betInp.value <= poeng && betInp.value >= 0){   /* Sjekker at man placer en betsum som gir mening */
                 for (let i = 0; i < bokserArr.length; i++) {
                     bokserArr[i].id = i+1
                 }
-                gevinst = 0
+                gevinst = 0   /* Definerer gevinst */
                 betSum = Number(betInp.value)
                 poeng -= betSum
                 betInp.value = ''
-                bet.innerHTML=`Bet: ${betSum} poeng`
-                
-                poengEl.innerHTML=`Poeng: ${poeng.toFixed(1)}`
-
+                bet.innerHTML = `Bet: ${betSum} poeng`
+                poengEl.innerHTML = `Poeng: ${poeng.toFixed(1)}`   /* Updater poegsummen på skjermen */
                 tilbakeMeld.innerHTML = 'Gevinst: '
-
-                blaCounter = 25
-                for (let i = 0; i < bokserArr.length; i++) {
-                    bokserArr[i].addEventListener('click', blaKlikkF)
+                gronnCounter = 25
+                for (let i = 0; i < bokserArr.length; i++) {   /* Gir boksene muligheten til å bli grønne */
+                    bokserArr[i].addEventListener('click', gronnKlikkF)
+                    bokserArr[i].innerHTML = (betSum / gronnCounter).toFixed(2)
                 }
-
-                randomId = Math.floor(Math.random()*25+1)
+                randomId = Math.floor(Math.random()*25+1)   /* Definerer hvilken boks som skal bli den røde bombe-boksen */
                 randomBoks = document.getElementById(randomId)
-                console.log(randomId)
+                console.log(randomId)   /* Gjør det lett å teste spillet, kan tas bort for ungåelse av juks */
                 randomBoks.addEventListener('click',rodKlikkF)
-                
-                cashInnOgRestart.addEventListener('click',cashInnOgRestartF)
+                cashInnOgRestart.addEventListener('click',cashInnF)
             }
             else if(betInp.value<0){
                 tilbakeMeld.innerHTML = 'Bet kan ikke være minus'
@@ -633,7 +683,8 @@
                 tilbakeMeld.innerHTML = 'Bet må være mindre eller lik poeng'
             }
             
-        })
+        }
+        place.addEventListener('click', placeF)   /* Event-listeneren legges på place-knappen ved åpning av spillet */
     </script>
 </body>
 </html>
