@@ -6,6 +6,76 @@
     <title>Pacman</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stylesheet_packman.css">
+
+    <style>
+        body{
+            background-color: #242222;
+        }
+
+        #packman-intro{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            background-image: url("../bilder/kjapp-mann-bakgrunn.png") ;
+            background-attachment: fixed;
+            opacity: 1;
+
+            height: 100vh;
+            width: 100vw;
+
+
+            background-size: cover;
+
+            
+        }
+        #packman-intro div{
+            margin: 10px;
+        }
+        
+        #button-container{
+            display: flex;
+            justify-content: center;
+            width: 70vw;
+            
+        }
+
+        
+        
+        #pacman-text{
+            font-weight: 600;
+            word-spacing: 1.5px;
+            max-width:400px ;
+        }
+
+        
+
+        h1, #intro-box{
+            background-color: #242222;
+            padding: 20px;
+            
+        }
+
+        #intro-box{
+            max-width: 60vw;
+            padding: 25px;
+   
+        }
+
+        @media screen and (max-width: 550px){
+            
+            #packman-intro{
+                height: 120vh;
+            }
+
+            #button-container{
+                flex-direction: column;
+                align-items: center;
+            }
+
+            
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,16 +86,10 @@
     <div id="packman-intro">
         <h1 id="intro-title">Packman</h1>
         <div id="intro-box">
-            <p> Nonograms er et logisk puslespill. Reglene er enkle. Du har et rutenett med ruter,
-                som kan fylles med enten en mørk farge eller merkes med en lysere en. 
-                Målet ditt er å fylle alle mørke firkanter. 
-                Ved siden av hver rad og kolonne i rutenettet er det listet opp lengden på løpene med mørke ruter på den raden eller kolonnen.
-                Venstreklikk på en firkant for å fylle den med mørk farge. 
-                For å markere en firkant du ikke vil fylle med mørk farge, må du holde nede Ctrl mens du trykker. 
-                Dersom du spiller på mobiltelefon kan du skru på markering ved hjelp av slideren nederst på siden.
+            <p id="pacman-text"> Packman er et klassisk arkadespill. Reglene er enkle. Du styrer Packman, en rund figur som beveger seg rundt på et rutenett fylt med prikker og spøkelser. Målet ditt er å spise alle prikkene på rutenettet uten å bli fanget av spøkelsene. Hver gang du spiser en stor prikk, kan Packman midlertidig spise spøkelsene også. Bruk W.A.S.D til å styre Packman rundt på rutenettet, eller knappene på skjermen hvis du spiller på mobil eller nettbrett. 
                 <br>
                 <br>
-                Lykke til!
+                Pass på spøkelsene og ikke la dem ta deg! Lykke til!
             </p>
         </div>
         <div id="button-container">

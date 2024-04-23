@@ -93,7 +93,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             }
 
             draw() {
-                c.save()
+                c.save() //saves the entire state of the canvas by pushing the current state onto a stack. hentet fra https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save 
                 c.translate(this.position.x, this.position.y)
                 c.rotate(this.rotation)
                 c.translate(-this.position.x, -this.position.y)
@@ -485,7 +485,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
 
                             setTimeout(function() {
-                                mainEl.innerHTML = `<h1>Du er tom for liv</h1>
+                                mainEl.innerHTML = `<h1>Du tapte dessverre</h1>
         
                                 <i class="fa-solid fa-heart-crack"></i>
         

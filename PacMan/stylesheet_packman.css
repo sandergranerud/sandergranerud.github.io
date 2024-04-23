@@ -13,21 +13,11 @@ body{
 }
 
 
-
-
-h2, h1{
+h2, h1, p{
     color: white;
     
 }
-#packman-intro{
-    flex-direction: column;
-    background-image: url("../bilder/nonogram_bakgrunn.png") ;
-    opacity: 0.5;
-    height: 100%; 
-    background-size: cover;
 
-    
-}
 #button-container{
     display: flex;
 }
@@ -53,7 +43,7 @@ header{
 }
 
 header .fa-house{
-    color: #282123;
+    color: white;
     font-size: 35px;
 
     padding: 10px;
