@@ -27,7 +27,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         
 
 
-    console.log(localStorage.teller)
+    console.log(localStorage.poeng)
 
     let playerSpeed 
     let ghostSpeed 
@@ -124,7 +124,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             constructor({ 
                 position, 
                 velocity, 
-                color = 'red' }) {
+                color}) {
                 this.position = position
                 this.velocity = velocity
                 this.radius = 15
@@ -137,7 +137,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             draw() {
                 c.beginPath()
                 c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
-                //ternary operator
+                //ternary operator, kan brukes i stedenfor if test, hvis this.scared er sant vil fargen bli blå, men hvis det er galt vil ghost bli vanlig farge igjen
                 c.fillStyle = this.scared ? 'blue' : this.color
                 c.fill()
                 c.closePath()
@@ -503,13 +503,13 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                                 mainEl.style.height = "89vh"
 
         
-                                if (!localStorage.teller){
-                                    localStorage.teller = 1
+                                if (!localStorage.poeng){
+                                    localStorage.poeng = 1
                                 }
                                 else{
-                                    localStorage.teller = Number(localStorage.teller) + score
+                                    localStorage.poeng = Number(localStorage.poeng) + score
                                 }
-                                console.log(localStorage.teller)
+                                console.log(localStorage.poeng)
 
                                 const tilForsidenButton = document.getElementById("til-forsiden-button")
         
@@ -553,13 +553,13 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                     mainEl.style.justifyContent = "space-evenly"
                     mainEl.style.height = "89vh"
 
-                    if (!localStorage.teller){
-                        localStorage.teller = 1
+                    if (!localStorage.poeng){
+                        localStorage.poeng = 1
                     }
                     else{
-                        localStorage.teller = Number(localStorage.teller) + score
+                        localStorage.poeng = Number(localStorage.poeng) + score
                     }
-                    console.log(localStorage.teller)
+                    console.log(localStorage.poeng)
 
                     const tilForsidenButton = document.getElementById("til-forsiden-button")
         
@@ -815,10 +815,6 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         })
 
         }) 
-
-        /* addEventListener('keydown', function(){
-            this.location.reload()
-        }) */
 }
 
 
