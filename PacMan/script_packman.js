@@ -6,12 +6,11 @@ let difficultyButtonEls = document.querySelectorAll('.difficultyGrade')
 
 
 
-
 for (let i = 0; i<difficultyButtonEls.length;i++){
     difficultyButtonEls[i].addEventListener('click', function(){
         introEl.style.display = 'none'        
 
-
+        let mainEl = document.querySelector('main')
         const canvasEl = document.querySelector('canvas')
         //Henter informasjon om canvas elementet
         const c = canvasEl.getContext('2d')
@@ -19,10 +18,16 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         let scoreText = document.querySelector('#score-text')
         let buttonsEls = document.querySelectorAll('.movement')
 
-        scoreText.classList.remove('hidden')
+        scoreText.classList.remove('hidden');
         scoreEl.classList.remove('hidden');
         canvasEl.classList.remove('hidden');
+        for (let i = 0; i<buttonsEls.length; i++){
+            buttonsEls[i].classList.remove('hidden');    
+        }
+        
 
+
+    console.log(localStorage.poeng)
 
     let playerSpeed 
     let ghostSpeed 
@@ -31,7 +36,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
     let scoreAmount
 
     if(difficultyButtonEls[i].innerHTML == 'Lett'){ 
-        playerSpeed = 5
+        playerSpeed = 4
         ghostSpeed = 2
         totalGhosts = 2
         timeGhostScared = 5000
@@ -48,7 +53,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         playerSpeed = 4
         ghostSpeed = 4
         totalGhosts = 5
-        timeGhostScared = 3000
+        timeGhostScared = 4000
         scoreAmount = 20
     }
 
@@ -119,7 +124,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             constructor({ 
                 position, 
                 velocity, 
-                color = 'red' }) {
+                color}) {
                 this.position = position
                 this.velocity = velocity
                 this.radius = 15
@@ -132,7 +137,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             draw() {
                 c.beginPath()
                 c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
-                //ternary operator
+                //ternary operator, kan brukes i stedenfor if test, hvis this.scared er sant vil fargen bli blå, men hvis det er galt vil ghost bli vanlig farge igjen
                 c.fillStyle = this.scared ? 'blue' : this.color
                 c.fill()
                 c.closePath()
@@ -472,14 +477,105 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                             }
                             else { 
                             cancelAnimationFrame(animationId)
-                            console.log("you lose")}
+
+
+                            document.body.style.transition = "background-color 1s ease"
+                            setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
+                            setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
+
+
+                            setTimeout(function() {
+                                mainEl.innerHTML = `<h1>Du er tom for liv</h1>
+        
+                                <i class="fa-solid fa-heart-crack"></i>
+        
+                                <h2>Din score ble: ${score} </h2> 
+                                <h2>Prøv på nytt! </h2>
+        
+                                <div id = "knapp-boks">
+        
+                                <button id = "til-forsiden-button"> Til Forsiden </button>
+                                <button id = "ny-runde-button"> Ny Runde </button>
+                                </id>    
+                                `
+        
+                                mainEl.style.justifyContent = "space-evenly"
+                                mainEl.style.height = "89vh"
+
+        
+                                if (!localStorage.poeng){
+                                    localStorage.poeng = 1
+                                }
+                                else{
+                                    localStorage.poeng = Number(localStorage.poeng) + score
+                                }
+                                console.log(localStorage.poeng)
+
+                                const tilForsidenButton = document.getElementById("til-forsiden-button")
+        
+                                tilForsidenButton.addEventListener("click", function(){
+                                    window.location.href = "../index.html"
+        
+                                })
+        
+                                const nyRundeButton = document.getElementById("ny-runde-button")
+        
+                                nyRundeButton.addEventListener("click", function(){
+                                    location.reload()
+                                })
+                            }
+                            , 700)
+                        }
                         }
             }
 
+
             // Win condition goes here
             if (pellets.length === 0){
-                console.log("You win")
-                cancelAnimationFrame(animationId)      
+                cancelAnimationFrame(animationId)
+
+                document.body.style.transition = "background-color 1s ease"
+                setTimeout(function(){document.body.style.backgroundColor = "green"}, 10)
+                setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
+
+                setTimeout(function() {
+                    mainEl.innerHTML = `<h1>Du klarte det!</h1>
+                    <i class="fa-solid fa-trophy"></i>
+                    <h2>Din score ble: ${score}</h2>
+
+                    <div id = "knapp-boks">
+        
+                    <button id = "til-forsiden-button"> Til Forsiden </button>
+                    <button id = "ny-runde-button"> Ny Runde </button>
+                    </id>
+                    `
+
+                    mainEl.style.justifyContent = "space-evenly"
+                    mainEl.style.height = "89vh"
+
+                    if (!localStorage.poeng){
+                        localStorage.poeng = 1
+                    }
+                    else{
+                        localStorage.poeng = Number(localStorage.poeng) + score
+                    }
+                    console.log(localStorage.poeng)
+
+                    const tilForsidenButton = document.getElementById("til-forsiden-button")
+        
+                    tilForsidenButton.addEventListener("click", function(){
+                        window.location.href = "../index.html"
+
+                    })
+
+                    const nyRundeButton = document.getElementById("ny-runde-button")
+
+                    nyRundeButton.addEventListener("click", function(){
+                        location.reload()
+                    })
+                }
+                , 700)
+                      
             }
 
                         
