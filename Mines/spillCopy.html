@@ -24,9 +24,6 @@
             height: 100%;
             width: 100%;
         }
-        button{
-            cursor: pointer;
-        }
         button:hover{ 
             background-color: yellow;
         }
@@ -489,10 +486,6 @@
         divForHolderAvLeaderboardEl = document.getElementById('divForHolderAvLeaderboard')
 
 
-        back.addEventListener('click', function(){
-            window.location.href = 'index.html'
-        })
-
         /* Poeng */
         if(localStorage.poeng){   /* Sjekker om spillet har blitt kjørt på pcen før og henter evt scoren fra localStorage */
             poeng = JSON.parse(localStorage.poeng)
@@ -513,63 +506,34 @@
 
 
         /* Laging av leaderboard: */
-        personerArr = []   /* Kunne også kalt fakeNavnArr */
-        randomScoreArr = []
-        leaderboardLiArr = []  /* Arry med liste elementene */
+        leaderboardLiArr = []   /* Array med de 5 fake personene og evt spilleren */
+        leaderboardPersonerArr = []  /* Arry med de 5 liste elementene som vises på skjermen */
         async function leaderboardF(){
             for (let i = 0; i < 5; i++) {
                 fetchedUrl = await fetch('https://randomuser.me/api/')   /* Fant på https://apipheny.io/free-api/ */
                 data = await fetchedUrl.json()   /* Promice om å gjøre informasjonen til json format */
-                person = data['results'][0]   /* Informasjon om enkeltperson */
-                if (!randomScoreArr[i]) {
-                    randomScoreArr[i] = []; /* Må passe på at arrayet finnnes */
-                }
-                randomScore = Math.floor(Math.random() * 1000) + 8000 - i * 800   /* Scorene er altså laga med Math.random, men er set til å være mellom tusener, for å få rekkefølgen på leadenboarden til å se halveis realistisk ut */
-                randomScoreArr[i].push(randomScore)   /* Gjør det lett å identifisere hvilken score de forskjellige plassene på leaderboarden har. Bruker dette til å plassere spilleren av spillet riktig på leaderboardet, når spilleren har mer i score enn laveste score på leaderboard, eller om du vil, scoren til objekt nummer 4 i scoreArr  */
-                personsUsernameOgRandomScore = `${person.login.username}: ${randomScore}`   /* Her settes de fem elementene i personerArr sammen.. */
-                personerArr.push(personsUsernameOgRandomScore)   /* ...før de legges i arrayet... */
+                randomNavn = data['results'][0]   /* Informasjon om fake enkeltperson */
+                randomScore = Math.floor(Math.random() * 8000) + 4000   /* Random score fra 4 til 12000 */
+                fakePerson = {navn: randomNavn, score: randomScore}
+                leaderboardPersonerArr.push(fakePerson)   /* lager objekter av de 5 fake personene */
             }
-            console.log(personerArr)
-            for (let i = 0; i < 5; i++) {   /* ...og legges inn i leaderboarden i nylagde liste-elementer med distikte id'er og klassen "leaderboardNavn" */
+            /* Sorterer personerArr og gjør at du kommer opp på leaderboarden hvis du har høy nok score */
+            /* DE TO UNDER SKAL IVERKSETTES ETTER DEN FØRSTE FOR LØKKA, MEN TRENGER IKKE VÆRE ASYNC, HVORDA GJØR MAN DET */
+            leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+            if(poeng > leaderboardPersonerArr[4].score){
+                spiller = {navn: 'you', score: poeng}
+                leaderboardPersonerArr.push(spiller)
+                leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+            }
+            /* Lager leaderboarden riktig */
+            for (let i = 0; i < 5; i++) {   /* ...og legges inn i leaderboarden i nylagde liste-elementer med klassen "leaderboardNavn" */
                 leaderboardLiEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
-                leaderboardLiEl.innerHTML = personerArr[i]
+                leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
                 leaderboardLiEl.classList.add('leaderboardLiClass')
-                leaderboardLiEl.id = 'leaderboardLiId' + i
-                if (!leaderboardLiArr[i]) {
-                    leaderboardLiArr[i] = [];
-                }
                 leaderboardLiArr[i].push(leaderboardLiEl)
             }
         }
         leaderboardF()
-
-        
-        /* Gjør at du kommer opp på leaderboarden hvis du har høy nok score */
-        if(poeng > randomScoreArr[4]){
-            leaderboardLiArr[4].display = 'none'
-            if(poeng > randomScoreArr[4] && poeng <= randomScoreArr[3]){
-            }
-            else if(poeng > randomScoreArr[3] && poeng <= randomScoreArr[2]){
-            }
-            else if(poeng > randomScoreArr[2] && poeng <= randomScoreArr[1]){
-                for (let i = 3; i > 1; i--) {
-                    leaderboardLiArr[i] = leaderboardLiArr[i+1]
-                }
-                leaderboardLiArr[2].innerHTML = 'You: ' + poeng   /* Spilleren er nå på tredjeplass på leaderboard */
-            }
-            else if(poeng > randomScoreArr[1] && poeng <= randomScoreArr[0]){
-                for (let i = 3; i > 0; i--) {
-                    leaderboardLiArr[i] = leaderboardLiArr[i+1]
-                }
-                leaderboardLiArr[1].innerHTML = 'You: ' + poeng
-            }
-            else if(poeng > randomScoreArr[0]){
-                for (let i = 3; i >= 0; i--) {
-                    leaderboardLiArr[i] = leaderboardLiArr[i+1]
-                }
-                leaderboardLiArr[0].innerHTML = 'You: ' + poeng
-            }
-        }
 
 
         /* Åpning og lukking av leaderboard */
@@ -673,6 +637,20 @@
             cashInnOgRestart.innerHTML = 'Restart'
             cashInnOgRestart.addEventListener('click', restartF)
             localStorage.poeng = poeng   /* Updater poengsum i local storage */
+
+            /* Updater leaderboarden */
+            if(poeng > leaderboardPersonerArr[4].score){
+                if(!leaderboardLiArr.includes(li.spiller)){   /* TROR IKKKE DETTE FUNKER, FINNES DET EN BEDRE MÅTE Å IDENTIFISERE */
+                    spiller = {navn: 'you', score: poeng}
+                    leaderboardPersonerArr.push(spiller)
+                }
+                leaderboardPersonerArr.sort((a, b) => a.score - b.score)
+                leaderboardArr = []
+                for (let i = 0; i < 5; i++) {
+                    leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+                    leaderboardLiArr[i].push(leaderboardLiEl)
+                }
+            }   
         }
 
         function placeF(){

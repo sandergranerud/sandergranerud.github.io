@@ -6,7 +6,6 @@ let difficultyButtonEls = document.querySelectorAll('.difficultyGrade')
 
 
 
-
 for (let i = 0; i<difficultyButtonEls.length;i++){
     difficultyButtonEls[i].addEventListener('click', function(){
         introEl.style.display = 'none'        
@@ -27,6 +26,8 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         }
         
 
+
+    console.log(localStorage.poeng)
 
     let playerSpeed 
     let ghostSpeed 
@@ -52,7 +53,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         playerSpeed = 4
         ghostSpeed = 4
         totalGhosts = 5
-        timeGhostScared = 3000
+        timeGhostScared = 4000
         scoreAmount = 20
     }
 
@@ -123,7 +124,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             constructor({ 
                 position, 
                 velocity, 
-                color = 'red' }) {
+                color}) {
                 this.position = position
                 this.velocity = velocity
                 this.radius = 15
@@ -136,7 +137,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
             draw() {
                 c.beginPath()
                 c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
-                //ternary operator
+                //ternary operator, kan brukes i stedenfor if test, hvis this.scared er sant vil fargen bli blå, men hvis det er galt vil ghost bli vanlig farge igjen
                 c.fillStyle = this.scared ? 'blue' : this.color
                 c.fill()
                 c.closePath()
@@ -498,12 +499,18 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                                 </id>    
                                 `
         
-                                localStorage.nonogramStreak = 0
-        
                                 mainEl.style.justifyContent = "space-evenly"
                                 mainEl.style.height = "89vh"
 
         
+                                if (!localStorage.poeng){
+                                    localStorage.poeng = 1
+                                }
+                                else{
+                                    localStorage.poeng = Number(localStorage.poeng) + score
+                                }
+                                console.log(localStorage.poeng)
+
                                 const tilForsidenButton = document.getElementById("til-forsiden-button")
         
                                 tilForsidenButton.addEventListener("click", function(){
@@ -534,7 +541,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                 setTimeout(function() {
                     mainEl.innerHTML = `<h1>Du klarte det!</h1>
                     <i class="fa-solid fa-trophy"></i>
-                    <h2>Din streak er nå: ${localStorage.nonogramStreak}</h2>
+                    <h2>Din score ble: ${score}</h2>
 
                     <div id = "knapp-boks">
         
@@ -545,6 +552,14 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
                     mainEl.style.justifyContent = "space-evenly"
                     mainEl.style.height = "89vh"
+
+                    if (!localStorage.poeng){
+                        localStorage.poeng = 1
+                    }
+                    else{
+                        localStorage.poeng = Number(localStorage.poeng) + score
+                    }
+                    console.log(localStorage.poeng)
 
                     const tilForsidenButton = document.getElementById("til-forsiden-button")
         
@@ -800,10 +815,6 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         })
 
         }) 
-
-        /* addEventListener('keydown', function(){
-            this.location.reload()
-        }) */
 }
 
 
