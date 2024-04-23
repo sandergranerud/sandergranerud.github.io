@@ -1,4 +1,4 @@
-const mainEl = document.querySelector("main")
+        const mainEl = document.querySelector("main")
 
         let radLength
         
@@ -488,12 +488,21 @@ const mainEl = document.querySelector("main")
                     document.body.style.transition = "background-color 1s ease"
                     setTimeout(function(){document.body.style.backgroundColor = "green"}, 10)
                     setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
+
+                    if(localStorage.vanskelighetsgrad === "lett"){
+                        localStorage.poeng += 1000
+                    }else if(localStorage.vanskelighetsgrad === "medium"){
+                        localStorage.poeng += 1750
+                    }else if(localStorage.vanskelighetsgrad === "vanskelig"){
+                        localStorage.poeng += 2500
+                    }
                         
 
                     setTimeout(function() {
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
                         <i class="fa-solid fa-trophy"></i>
                         <h2>Din streak er nå: ${nonogramStreak}</h2>
+                        <h2>Poeng: ${localStorage.poeng}</h2>
 
                         <button>Ny runde </button>`
 
@@ -527,9 +536,7 @@ const mainEl = document.querySelector("main")
                 fullClass(aktivBoksEl)
                 ferdig()
 
-                
-
-                
+  
 
             }
 

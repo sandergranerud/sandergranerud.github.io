@@ -1,3 +1,17 @@
+let tekstBoksEl = document.getElementById("tekst-boks")
+
+if(!localStorage.poeng){
+    localStorage.poeng = 0
+}
+
+poengBoksEl = document.createElement("h3")
+
+poengBoksEl.innerHTML = `Dine Poeng: ${localStorage.poeng}`
+
+tekstBoksEl.appendChild(poengBoksEl)
+
+
+
 let pictureEL = document.querySelectorAll('img')
 let videoEl = document.querySelectorAll('video')
 
