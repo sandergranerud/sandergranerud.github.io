@@ -159,7 +159,7 @@ p{
     
 }
 
-#health-container{
+#liv-container{
     width: 50vw;
     min-width: 180px;
     max-width: 210px;
@@ -168,7 +168,7 @@ p{
     justify-content: space-between;
 }
 
-#health-container .fa-heart{
+#liv-container .fa-heart{
     color: rgb(200, 0, 0);
     font-size: 58px;
     text-shadow: 0 0 7px #971919;
@@ -262,12 +262,12 @@ button:hover{
         max-height: 450px;
     }
 
-    #health-container{
+    #liv-container{
         flex-direction: column;
         width: fit-content;
         margin-left: 25px;
     }
-    #health-container .fa-heart{
+    #liv-container .fa-heart{
         padding: 10px;
         font-size: 68px;
     }
