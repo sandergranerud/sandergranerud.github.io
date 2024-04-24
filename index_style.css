@@ -136,7 +136,7 @@ main div a img{
     height: 75vh;
     object-fit: cover;
 
-    max-width: 400px;
+    max-width: 600px;
     
 }
 
@@ -154,7 +154,7 @@ main div a img{
 
     object-fit: cover;
 
-    max-width: 400px;
+    max-width: 600px;
 }
 
 
@@ -174,7 +174,7 @@ main div a img{
     height: 37.5vh;
     object-fit: cover;
 
-    max-width: 370px;
+    max-width: 600px;
 
     border-radius: 20px;
     
@@ -233,7 +233,7 @@ main div a img{
     main{
         flex-direction: column;
         height: 100vh;
-        width: 60vw;
+        width: 70vw;
         align-items: center;
     }
 
@@ -241,6 +241,7 @@ main div a img{
 
     .picture-container1{
         height: 30vh;
+
     }
     .picture-container1 a, .picture-container1 a img{
         height: 30vh;
@@ -255,10 +256,12 @@ main div a img{
 
         height: 30vh;
 
- 
+
     }
 
 
-
+    .picture-container1, .picture-container2, .picture-container3, .picture-container1 a img, .smaller-games a img{
+        width: 70vw;
+    }
 
 }
