@@ -94,7 +94,7 @@ main div a img{
 
 }
 
-.picture-container1 a, .picture-container1 a img{
+.picture-container1 a, .picture-container1 a img, .picture-container1 video{
     width: 40vw;
     height: 75vh;
     object-fit: cover;
@@ -132,13 +132,14 @@ main div a img{
 
 }
 
-.smaller-games a, .smaller-games a img{
+.smaller-games a, .smaller-games a img, .smaller-games video{
     width: 40vw;
     height: 37.5vh;
     object-fit: cover;
 
     max-width: 370px;
 
+    border-radius: 20px;
     
 }
 
@@ -153,18 +154,18 @@ main div a img{
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
-
-
-    object-fit: cover;
-
-    max-width: 400px;
 }
 
 
 @media(max-width: 600px){
-/*     main{
+    main{
         flex-direction: column;
+        height: 100vh;
+        width: 60vw;
+        align-items: center;
     }
+
+    
 
     .picture-container1{
         height: 30vh;
@@ -176,7 +177,7 @@ main div a img{
         height: 30vh;
     }
     .smaller-games { 
-        height: 30vh;
+        height: 60vh;
     }
     .smaller-games a, .smaller-games a img{
 
@@ -186,6 +187,6 @@ main div a img{
     }
 
 
- */
+
 
 }
