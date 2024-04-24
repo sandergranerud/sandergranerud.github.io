@@ -15,12 +15,12 @@ body {
 }
 header{
     width: 100vw;
-    height: 12.5vh;
+    height: 13vh;
 
     background-image: linear-gradient(to right, rgb(219, 51, 51), rgb(13, 179, 63), rgb(15, 102, 201));
 
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
 
     border-bottom: solid 1px white;
@@ -32,6 +32,14 @@ header .fa-house{
 
     padding: 10px;
     margin-left: 15vw;
+}
+header h1{
+    color: white;
+    font-size: 42px;
+}
+header #plassholder{
+    width: 59px;
+    margin-right: 15vw;
 }
 
 
@@ -73,6 +81,21 @@ footer p, footer h3{
 }
 footer div{
     width: 80vw;
+}
+
+#poeng-boks{
+    margin-top: 5vh;
+
+    background-color: rgb(41, 41, 41);
+    padding: 10px;
+    padding-left: 17px;
+    padding-right: 17px;
+
+    border-radius: 10px;
+}
+#poeng-boks h1{
+    color: white;
+    font-size: 30px;
 }
 
 
@@ -168,6 +191,41 @@ main div a img{
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
+}
+
+.sentrert-tekst{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+
+
+    
+
+    width: 60%;
+    height: 60%;
+
+}
+.sentrert-tekst p{
+    font-size: 5vw;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+   
+}
+
+.picture-container1:hover a .sentrert-tekst, .picture-container2:hover a .sentrert-tekst, .picture-container3:hover a .sentrert-tekst{
+    display: none;
+    
+}
+
+@media(min-width: 600px){
+    .sentrert-tekst p{
+        font-size: 40px;
+        
+    }
 }
 
 
