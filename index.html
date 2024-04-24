@@ -11,46 +11,11 @@ inspo forside:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RGB-spill</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="index_style.css">
 
     <style>
-        .sentrert-tekst{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 20%;
-            left: 20%;
-
-
-            
-
-            width: 60%;
-            height: 60%;
-
-        }
-        .sentrert-tekst p{
-            font-size: 5vw;
-            font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 5px rgb(0, 0, 0);
-           
-        }
-
-        .picture-container1:hover a .sentrert-tekst, .picture-container2:hover a .sentrert-tekst, .picture-container3:hover a .sentrert-tekst{
-            display: none;
-            
-        }
-
-        @media(min-width: 600px){
-            .sentrert-tekst p{
-                font-size: 40px;
-                
-            }
-        }
-
         
     </style>
 </head>
@@ -59,10 +24,13 @@ inspo forside:
         <a href="index.html">
         <i class="fa-solid fa-house"></i>
         </a>
+        <h1>RGB-spill</h1>
+        <div id="plassholder"></div>
 
     </header>
 
-    
+    <div id ="poeng-boks"></div>
+
     <main>
 
         <div class="picture-container1">
@@ -88,7 +56,7 @@ inspo forside:
                     <img src="bilder/minefelt_index.jpeg" alt="Spill1">
                     <div class="sentrert-tekst"><p>Minefelt</p></div>
                 </a>            
-                    <video src="bilder/video.test.mp4" muted></video>
+                    <video src="bilder/video_mines.mp4" muted></video>
             </div>
         </div>
 
@@ -98,7 +66,7 @@ inspo forside:
     </main>
 
     <footer>
-        <div id="text-box">
+        <div>
             <p>
                 Velkommen til RGB-spill!
                 <br>

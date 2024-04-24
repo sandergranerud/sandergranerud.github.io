@@ -1,14 +1,12 @@
-let tekstBoksEl = document.getElementById("text-box")
-
 if(!localStorage.poeng){
     localStorage.poeng = 0
 }
 
-poengBoksEl = document.createElement("h3")
+let poengBoksEl = document.getElementById("poeng-boks")
+poengEl = document.createElement("h1")
+poengEl.innerHTML = `Poeng: ${localStorage.poeng}`
 
-poengBoksEl.innerHTML = `Dine Poeng: ${localStorage.poeng}`
-
-tekstBoksEl.appendChild(poengBoksEl)
+poengBoksEl.appendChild(poengEl)
 
 
 
