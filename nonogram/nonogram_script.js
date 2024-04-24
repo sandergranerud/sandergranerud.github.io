@@ -490,11 +490,11 @@
                     setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 400)
 
                     if(localStorage.vanskelighetsgrad === "lett"){
-                        localStorage.poeng = Number(localStorage.poeng) + 1000
+                        localStorage.poeng = Number(localStorage.poeng) + 300
                     }else if(localStorage.vanskelighetsgrad === "medium"){
-                        localStorage.poeng = Number(localStorage.poeng) + 1750
+                        localStorage.poeng = Number(localStorage.poeng) + 1000
                     }else if(localStorage.vanskelighetsgrad === "vanskelig"){
-                        localStorage.poeng = Number(localStorage.poeng) + 2500
+                        localStorage.poeng = Number(localStorage.poeng) + 2000
                     }
                         
 
