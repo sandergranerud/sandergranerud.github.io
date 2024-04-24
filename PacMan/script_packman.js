@@ -1,105 +1,105 @@
 // https://www.youtube.com/watch?v=5IMXpp3rohQ&t=6001s
 let introEl = document.querySelector('#packman-intro')
-let difficultyButtonEls = document.querySelectorAll('.difficultyGrade')
+let vanskelighetsgradKnapperEls = document.querySelectorAll('.difficultyGrade')
 
 
 
 
 
-for (let i = 0; i<difficultyButtonEls.length;i++){
-    difficultyButtonEls[i].addEventListener('click', function(){
+for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
+    vanskelighetsgradKnapperEls[i].addEventListener('click', function(){
         introEl.style.display = 'none'        
 
         let mainEl = document.querySelector('main')
         const canvasEl = document.querySelector('canvas')
         //Henter informasjon om canvas elementet
         const c = canvasEl.getContext('2d')
-        const scoreEl = document.querySelector('#scoreEl')
+        const poengEl = document.querySelector('#poengEl')
         let scoreText = document.querySelector('#score-text')
-        let buttonsEls = document.querySelectorAll('.movement')
+        let knapperEls = document.querySelectorAll('.movement')
 
         scoreText.classList.remove('hidden');
-        scoreEl.classList.remove('hidden');
+        poengEl.classList.remove('hidden');
         canvasEl.classList.remove('hidden');
-        for (let i = 0; i<buttonsEls.length; i++){
-            buttonsEls[i].classList.remove('hidden');    
+        for (let i = 0; i<knapperEls.length; i++){
+            knapperEls[i].classList.remove('hidden');    
         }
         
 
 
     console.log(localStorage.poeng)
 
-    let playerSpeed 
-    let ghostSpeed 
-    let totalGhosts
-    let timeGhostScared 
-    let scoreAmount
+    let spillerFart 
+    let spoekelseFart 
+    let antallSpoekelser
+    let tidSpoekelseRedd 
+    let poengMengde
 
-    if(difficultyButtonEls[i].innerHTML == 'Lett'){ 
-        playerSpeed = 4
-        ghostSpeed = 2
-        totalGhosts = 2
-        timeGhostScared = 5000
-        scoreAmount = 5
+    if(vanskelighetsgradKnapperEls[i].innerHTML == 'Lett'){ 
+        spillerFart = 4
+        spoekelseFart = 2
+        antallSpoekelser = 2
+        tidSpoekelseRedd = 5000
+        poengMengde = 5
     }
-    else if(difficultyButtonEls[i].innerHTML == 'Medium'){ 
-        playerSpeed = 4
-        ghostSpeed = 2
-        totalGhosts = 4
-        timeGhostScared = 4000
-        scoreAmount = 10
+    else if(vanskelighetsgradKnapperEls[i].innerHTML == 'Medium'){ 
+        spillerFart = 4
+        spoekelseFart = 2
+        antallSpoekelser = 4
+        tidSpoekelseRedd = 4000
+        poengMengde = 10
     }
-    else if(difficultyButtonEls[i].innerHTML == 'Vanskelig'){ 
-        playerSpeed = 4
-        ghostSpeed = 4
-        totalGhosts = 5
-        timeGhostScared = 4000
-        scoreAmount = 20
+    else if(vanskelighetsgradKnapperEls[i].innerHTML == 'Vanskelig'){ 
+        spillerFart = 4
+        spoekelseFart = 4
+        antallSpoekelser = 5
+        tidSpoekelseRedd = 4000
+        poengMengde = 20
     }
 
 
 
 
 
-        class Boundary {
-            static width = 40
-            static height = 40
+        class Grense {
+            static bredde = 40
+            static hoyde = 40
             //constructor er et objekt inne i en klasse
-            constructor({ position, image }) {
+            constructor({ posisjon, bilde }) {
                 // 'this' brukes som et nøkkelord inne i en constructor objekt.
-                this.position = position
-                this.width = Boundary.width
-                this.height = Boundary.height
-                this.image = image  
+                this.posisjon = posisjon
+                this.bredde = Grense.bredde
+                this.hoyde = Grense.hoyde
+                this.bilde = bilde  
             }
 
             draw(){
                 //tegner et kvadrat
-                c.drawImage(this.image, this.position.x, this.position.y)
+                c.drawImage(this.bilde, this.posisjon.x, this.posisjon.y)
             }
         } 
 
-        class Player {
+        class Spiller {
             constructor({ 
-                position, 
-                velocity }) {
-                this.position = position
-                this.velocity = velocity
+                posisjon, 
+                hastighet }) {
+                this.posisjon = posisjon
+                this.hastighet = hastighet
                 this.radius = 15
-                this.radians = 0.75
-                this.openRate = 0.07
-                this.rotation = 0
-                this.speed = playerSpeed
+                this.radianer = 0.75
+                this.aapneRate = 0.07
+                this.rotasjon = 0
+                this.fart = spillerFart
             }
 
             draw() {
                 c.save() //saves the entire state of the canvas by pushing the current state onto a stack. hentet fra https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save 
-                c.translate(this.position.x, this.position.y)
-                c.rotate(this.rotation)
-                c.translate(-this.position.x, -this.position.y)
+                c.translate(this.posisjon.x, this.posisjon.y)
+                c.rotate(this.rotasjon)
+                c.translate(-this.posisjon.x, -this.posisjon.y)
                 c.beginPath()
-                c.arc(this.position.x, this.position.y, this.radius, this.radians, Math.PI * 2 - this.radians)
-                c.lineTo(this.position.x, this.position.y)
+                c.arc(this.posisjon.x, this.posisjon.y, this.radius, this.radianer, Math.PI * 2 - this.radianer)
+                c.lineTo(this.posisjon.x, this.posisjon.y)
                 c.fillStyle = 'yellow'
                 c.fill()
                 c.closePath()
@@ -108,60 +108,60 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
             update(){
                 this.draw()
-                this.position.x += this.velocity.x
-                this.position.y += this.velocity.y
+                this.posisjon.x += this.hastighet.x
+                this.posisjon.y += this.hastighet.y
 
-                if (this.radians < 0 || this.radians > .75) {
-                    this.openRate = -this.openRate
+                if (this.radianer < 0 || this.radianer > .75) {
+                    this.aapneRate = -this.aapneRate
         }
-                    this.radians += this.openRate 
+                    this.radianer += this.aapneRate 
             }
         }
 
 
-        class Ghost {
-            static speed = ghostSpeed
+        class Spoekelse {
+            static fart = spoekelseFart
             constructor({ 
-                position, 
-                velocity, 
-                color}) {
-                this.position = position
-                this.velocity = velocity
+                posisjon, 
+                hastighet, 
+                farge}) {
+                this.posisjon = posisjon
+                this.hastighet = hastighet
                 this.radius = 15
-                this.color = color
-                this.prevCollisions = []
-                this.speed = Ghost.speed
-                this.scared = false
+                this.farge = farge
+                this.tidligereKollisjoner = []
+                this.fart = Spoekelse.fart
+                this.redd = false
             }
 
             draw() {
                 c.beginPath()
-                c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
-                //ternary operator, kan brukes i stedenfor if test, hvis this.scared er sant vil fargen bli blå, men hvis det er galt vil ghost bli vanlig farge igjen
-                c.fillStyle = this.scared ? 'blue' : this.color
+                c.arc(this.posisjon.x, this.posisjon.y, this.radius, 0, Math.PI*2)
+                //ternary operator, kan brukes i stedenfor if test, hvis this.redd er sant vil fargen bli blå, men hvis det er galt vil Spoekelse bli vanlig farge igjen
+                c.fillStyle = this.redd ? 'blue' : this.farge
                 c.fill()
                 c.closePath()
             }
 
             update(){
                 this.draw()
-                this.position.x += this.velocity.x
-                this.position.y += this.velocity.y
+                this.posisjon.x += this.hastighet.x
+                this.posisjon.y += this.hastighet.y
             }
         }
 
 
-        class Pellet {
+        class Kule {
             constructor({ 
-                position, 
+                posisjon, 
                 }) {
-                this.position = position
+                this.posisjon = posisjon
                 this.radius = 3
             }
 
             draw() {
                 c.beginPath()
-                c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
+                c.arc(this.posisjon.x, this.posisjon.y, this.radius, 0, Math.PI*2)
                 c.fillStyle = 'white'
                 c.fill()
                 c.closePath()
@@ -170,15 +170,15 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
         class PowerUp {
             constructor({ 
-                position, 
+                posisjon, 
                 }) {
-                this.position = position
+                this.posisjon = posisjon
                 this.radius = 8
             }
 
             draw() {
                 c.beginPath()
-                c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2)
+                c.arc(this.posisjon.x, this.posisjon.y, this.radius, 0, Math.PI*2)
                 c.fillStyle = 'white'
                 c.fill()
                 c.closePath()
@@ -186,7 +186,7 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
         }
 
 
-        let map = [
+        let kart = [
             ['F','-','-','-','-','-','-','-','-','T','-','-','-','-','7'],
             ['|',' ','.','.','.','.','.','.','.','|','.','.','.','p','|'],
             ['|','.','[',']','.','[','-',']','.','U','.','[',']','.','|'],
@@ -208,40 +208,40 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
 
 
-        let colors =['red', 'pink', 'green', 'orange', 'lightBlue']
+        let farger =['red', 'pink', 'green', 'orange', 'lightBlue']
 
-        let pellets = []
-        let boundaries = []
+        let kuler = []
+        let grenser = []
         let powerUps = []
-        let ghosts = []
-        let player = new Player ({
-            position: {
-                x: Boundary.width * 1.5,
-                y: Boundary.height * 1.5
+        let spoekelser = []
+        let spiller = new Spiller ({
+            posisjon: {
+                x: Grense.bredde * 1.5,
+                y: Grense.hoyde * 1.5
 
             }, 
-            velocity: {
+            hastighet: {
                 x: 0,
                 y: 0
             }
         })
 
-        let keys = {
+        let taster = {
             w: {
-                pressed: false
+                presset: false
             },
             a: {
-                pressed: false
+                presset: false
             },
             s: {
-                pressed: false
+                presset: false
             },
             d: {
-                pressed: false
+                presset: false
             }
         }
 
-        let lastKey =''
+        let sisteTast =''
         let score = 0
 
 
@@ -249,91 +249,91 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
         
 
-        function createImage(src){
-            let image = new Image()
-            image.src = src
-            return image
+        function lagBilde(src){
+            let bilde = new Image()
+            bilde.src = src
+            return bilde
         }
 
-        function createBoundary(source, j, i){
-            boundaries.push(  
-            new Boundary({
-                position: {
-                    x: Boundary.width * j,
-                    y: Boundary.height * i
+        function lagGrense(source, j, i){
+            grenser.push(  
+            new Grense({
+                posisjon: {
+                    x: Grense.bredde * j,
+                    y: Grense.hoyde * i
                 }, 
-                image: createImage(source) 
+                bilde: lagBilde(source) 
             })
         )
         }
 
-        for (let i = 0; i < map.length; i++ ){
-            for (let j = 0; j < map[i].length; j++){
-                if(map[i][j] == "-"){
-                    createBoundary('./Bilder/pipeHorizontal.png', j, i)            
+        for (let i = 0; i < kart.length; i++ ){
+            for (let j = 0; j < kart[i].length; j++){
+                if(kart[i][j] == "-"){
+                    lagGrense('./Bilder/pipeHorizontal.png', j, i)            
                 }
-                else if (map[i][j] == "|"){
-                    createBoundary('./Bilder/pipeVertical.png', j, i)            
+                else if (kart[i][j] == "|"){
+                    lagGrense('./Bilder/pipeVertical.png', j, i)            
                 }
-                else if (map[i][j] == "O"){
-                    createBoundary('./Bilder/block.png', j, i)            
+                else if (kart[i][j] == "O"){
+                    lagGrense('./Bilder/block.png', j, i)            
                 }
-                else if (map[i][j] == "U"){
-                    createBoundary('./Bilder/capBottom.png', j, i)            
+                else if (kart[i][j] == "U"){
+                    lagGrense('./Bilder/capBottom.png', j, i)            
                 }
-                else if (map[i][j] == "["){
-                    createBoundary('./Bilder/capLeft.png', j, i)            
+                else if (kart[i][j] == "["){
+                    lagGrense('./Bilder/capLeft.png', j, i)            
                 }
-                else if (map[i][j] == "]"){  
-                    createBoundary('./Bilder/capRight.png', j, i)            
+                else if (kart[i][j] == "]"){  
+                    lagGrense('./Bilder/capRight.png', j, i)            
 
                 }
-                else if (map[i][j] == "="){
-                    createBoundary('./Bilder/capTop.png', j, i)            
+                else if (kart[i][j] == "="){
+                    lagGrense('./Bilder/capTop.png', j, i)            
                 }
-                else if (map[i][j] == "T"){
-                    createBoundary('./Bilder/pipeConnectorBottom.png', j, i)            
+                else if (kart[i][j] == "T"){
+                    lagGrense('./Bilder/pipeConnectorBottom.png', j, i)            
                 }
-                else if (map[i][j] == ">"){
-                    createBoundary('./Bilder/pipeConnectorLeft.png', j, i)            
+                else if (kart[i][j] == ">"){
+                    lagGrense('./Bilder/pipeConnectorLeft.png', j, i)            
                 }
-                else if (map[i][j] == "<"){
-                    createBoundary('./Bilder/pipeConnectorRight.png', j, i)            
+                else if (kart[i][j] == "<"){
+                    lagGrense('./Bilder/pipeConnectorRight.png', j, i)            
                 }
-                else if (map[i][j] == "Y"){
-                    createBoundary('./Bilder/pipeConnectorTop.png', j, i)            
+                else if (kart[i][j] == "Y"){
+                    lagGrense('./Bilder/pipeConnectorTop.png', j, i)            
                 }
-                else if (map[i][j] == "F"){
-                    createBoundary('./Bilder/pipeCorner1.png', j, i)            
+                else if (kart[i][j] == "F"){
+                    lagGrense('./Bilder/pipeCorner1.png', j, i)            
                 }
-                else if (map[i][j] == "7"){
-                    createBoundary('./Bilder/pipeCorner2.png', j, i)            
+                else if (kart[i][j] == "7"){
+                    lagGrense('./Bilder/pipeCorner2.png', j, i)            
                 }
-                else if (map[i][j] == "Z"){
-                    createBoundary('./Bilder/pipeCorner3.png', j, i)            
+                else if (kart[i][j] == "Z"){
+                    lagGrense('./Bilder/pipeCorner3.png', j, i)            
                 }
-                else if (map[i][j] == "L"){
-                    createBoundary('./Bilder/pipeCorner4.png', j, i)            
+                else if (kart[i][j] == "L"){
+                    lagGrense('./Bilder/pipeCorner4.png', j, i)            
                 }
-                else if (map[i][j] == "+"){
-                    createBoundary('./Bilder/pipeCross.png', j, i)            
+                else if (kart[i][j] == "+"){
+                    lagGrense('./Bilder/pipeCross.png', j, i)            
                 }
-                else if (map[i][j] == "."){
-                    pellets.push(
-                        new Pellet({
-                            position: {
-                                x: Boundary.width * j + Boundary.width/2,
-                                y: Boundary.height * i + Boundary.height/2
+                else if (kart[i][j] == "."){
+                    kuler.push(
+                        new Kule({
+                            posisjon: {
+                                x: Grense.bredde * j + Grense.bredde/2,
+                                y: Grense.hoyde * i + Grense.hoyde/2
                             }
                         })
                     )
                 }
-                else if (map[i][j] == "p"){
+                else if (kart[i][j] == "p"){
                     powerUps.push(
                         new PowerUp({
-                            position: {
-                                x: Boundary.width * j + Boundary.width/2,
-                                y: Boundary.height * i + Boundary.height/2
+                            posisjon: {
+                                x: Grense.bredde * j + Grense.bredde/2,
+                                y: Grense.hoyde * i + Grense.hoyde/2
                             }
                         })
                     )
@@ -345,138 +345,138 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
 
         
-        for (let i = 0; i<totalGhosts;i++){
-            ghosts.push(new Ghost({
-                position: {
-                    x: Boundary.width * 1.5 * 8,
-                    y: Boundary.height * 1.5 * 9
+        for (let i = 0; i<antallSpoekelser;i++){
+            spoekelser.push(new Spoekelse({
+                posisjon: {
+                    x: Grense.bredde * 1.5 * 8,
+                    y: Grense.hoyde * 1.5 * 9
                 },
-                velocity: {
-                    x: Ghost.speed,
+                hastighet: {
+                    x: Spoekelse.fart,
                     y: 0
                 },
-                color: colors[i]
+                farge: farger[i]
             }))
         }
 
 
 
-        function circleCollidesWithRectangle({circle, rectangle
+        function sirkelKollidereMedRektangel({sirkel, rektangel
         }){
-            let padding = Boundary.width/2 - circle.radius - 1
+            let padding = Grense.bredde/2 - sirkel.radius - 1
             return (
-                circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height + padding && 
-                circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x - padding && 
-                circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y - padding && 
-                circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width + padding
+                sirkel.posisjon.y - sirkel.radius + sirkel.hastighet.y <= rektangel.posisjon.y + rektangel.hoyde + padding && 
+                sirkel.posisjon.x + sirkel.radius + sirkel.hastighet.x >= rektangel.posisjon.x - padding && 
+                sirkel.posisjon.y + sirkel.radius + sirkel.hastighet.y >= rektangel.posisjon.y - padding && 
+                sirkel.posisjon.x - sirkel.radius + sirkel.hastighet.x <= rektangel.posisjon.x + rektangel.bredde + padding
                 )
         } 
 
-        let animationId
+        let animasjonsId
 
-        function animate() {
+        function animere() {
             //Spør nettleser om å kjøre så mange frames som mulig
-            animationId = requestAnimationFrame(animate)
+            animasjonsId = requestAnimationFrame(animere)
             c.clearRect(0,0, canvasEl.width, canvasEl.height)
 
             
-            if (keys.w.pressed && lastKey === 'w') {
-                for (let i = 0 ; i < boundaries.length; i++){
-                    let boundary = boundaries[i] 
+            if (taster.w.presset && sisteTast === 'w') {
+                for (let i = 0 ; i < grenser.length; i++){
+                    let grense = grenser[i] 
                     if(
-                        circleCollidesWithRectangle({
-                            circle: {...player, velocity: {
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spiller, hastighet: {
                                 x: 0,
-                                y: -player.speed
+                                y: -spiller.fart
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        player.velocity.y = 0
+                        spiller.hastighet.y = 0
                         break
                     }
                     else {
-                        player.velocity.y = -player.speed
+                        spiller.hastighet.y = -spiller.fart
                     }
                 }
             }
-            else if (keys.a.pressed && lastKey === 'a') {
-                for (let i = 0 ; i < boundaries.length; i++){
-                    let boundary = boundaries[i] 
+            else if (taster.a.presset && sisteTast === 'a') {
+                for (let i = 0 ; i < grenser.length; i++){
+                    let grense = grenser[i] 
                     if(
-                        circleCollidesWithRectangle({
-                            circle: {...player, velocity: {
-                                x: -player.speed,
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spiller, hastighet: {
+                                x: -spiller.fart,
                                 y: 0
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        player.velocity.x = 0
+                        spiller.hastighet.x = 0
                         break
                     }
                     else {
-                        player.velocity.x = -player.speed
+                        spiller.hastighet.x = -spiller.fart
                     }
                 }
             }
-            else if (keys.s.pressed && lastKey === 's') {
-                for (let i = 0 ; i < boundaries.length; i++){
-                    let boundary = boundaries[i] 
+            else if (taster.s.presset && sisteTast === 's') {
+                for (let i = 0 ; i < grenser.length; i++){
+                    let grense = grenser[i] 
                     if(
-                        circleCollidesWithRectangle({
-                            circle: {...player, velocity: {
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spiller, hastighet: {
                                 x: 0,
-                                y: player.speed
+                                y: spiller.fart
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        player.velocity.y = 0
+                        spiller.hastighet.y = 0
                         break
                     }
                     else {
-                        player.velocity.y = player.speed
+                        spiller.hastighet.y = spiller.fart
                     }
                 }
             }
-            else if (keys.d.pressed && lastKey === 'd') {
-                for (let i = 0 ; i < boundaries.length; i++){
-                    let boundary = boundaries[i] 
+            else if (taster.d.presset && sisteTast === 'd') {
+                for (let i = 0 ; i < grenser.length; i++){
+                    let grense = grenser[i] 
                     if(
-                        circleCollidesWithRectangle({
-                            circle: {...player, velocity: {
-                                x: player.speed,
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spiller, hastighet: {
+                                x: spiller.fart,
                                 y: 0
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        player.velocity.x = 0
+                        spiller.hastighet.x = 0
                         break
                     }
                     else {
-                        player.velocity.x = player.speed
+                        spiller.hastighet.x = spiller.fart
                     }
                 }
             }
 
-            // detect collision between ghosts and player
-            for (let i = ghosts.length -1; 0 <= i; i--){
-                let ghost = ghosts[i]
-                    //Ghost touches player
+            // detect collision between spoekelser and spiller
+            for (let i = spoekelser.length -1; 0 <= i; i--){
+                let spoekelse = spoekelser[i]
+                    //spoekelse touches spiller
                     if (Math.hypot(
-                        ghost.position.x - player.position.x,
-                        ghost.position.y - player.position.y
+                        spoekelse.posisjon.x - spiller.posisjon.x,
+                        spoekelse.posisjon.y - spiller.posisjon.y
                         ) <
-                        ghost.radius + player.radius 
+                        spoekelse.radius + spiller.radius 
                         ) {
 
-                            if (ghost.scared){
-                                ghosts.splice(i, 1)
+                            if (spoekelse.redd){
+                                spoekelser.splice(i, 1)
                             }
                             else { 
-                            cancelAnimationFrame(animationId)
+                            cancelAnimationFrame(animasjonsId)
 
 
                             document.body.style.transition = "background-color 1s ease"
@@ -531,8 +531,8 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
 
 
             // Win condition goes here
-            if (pellets.length === 0){
-                cancelAnimationFrame(animationId)
+            if (kuler.length === 0){
+                cancelAnimationFrame(animasjonsId)
 
                 document.body.style.transition = "background-color 1s ease"
                 setTimeout(function(){document.body.style.backgroundColor = "green"}, 10)
@@ -584,234 +584,234 @@ for (let i = 0; i<difficultyButtonEls.length;i++){
                 let powerUp = powerUps[i]
                 powerUp.draw()
 
-                //Player collides with power ups
+                //spiller collides with power ups
                 if (Math.hypot(
-                    powerUp.position.x - player.position.x,
-                    powerUp.position.y - player.position.y
+                    powerUp.posisjon.x - spiller.posisjon.x,
+                    powerUp.posisjon.y - spiller.posisjon.y
                     ) <
-                    powerUp.radius + player.radius
+                    powerUp.radius + spiller.radius
                     ){
                         powerUps.splice(i, 1)
 
-                        //Ghost scared
-                        ghosts.forEach(ghost => {
-                            ghost.scared = true
+                        //spoekelse redd
+                        spoekelser.forEach(spoekelse => {
+                            spoekelse.redd = true
 
 
                             setTimeout(() => {
-                                ghost.scared = false
-                            }, timeGhostScared)
+                                spoekelse.redd = false
+                            }, tidSpoekelseRedd)
                         })
                     }
             }
 
-            //Touch pellets here
-            for (let i = pellets.length -1; 0 <= i; i--){
-                let pellet = pellets[i]
-                pellet.draw()
+            //Touch kuler here
+            for (let i = kuler.length -1; 0 <= i; i--){
+                let kule = kuler[i]
+                kule.draw()
 
                 if (Math.hypot(
-                    pellet.position.x - player.position.x,
-                    pellet.position.y - player.position.y
+                    kule.posisjon.x - spiller.posisjon.x,
+                    kule.posisjon.y - spiller.posisjon.y
                     ) <
-                    pellet.radius + player.radius
+                    kule.radius + spiller.radius
                     ) {
-                    pellets.splice(i, 1)
-                    score += scoreAmount
-                    scoreEl.innerHTML = score
+                    kuler.splice(i, 1)
+                    score += poengMengde
+                    poengEl.innerHTML = score
                 }
             }
 
-            boundaries.forEach((boundary) => {
-                boundary.draw()
+            grenser.forEach((grense) => {
+                grense.draw()
 
                 if(
-                    circleCollidesWithRectangle({
-                        circle: player,
-                        rectangle: boundary
+                    sirkelKollidereMedRektangel({
+                        sirkel: spiller,
+                        rektangel: grense
                     })
                 ) {
                     
-                    player.velocity.y = 0
-                    player.velocity.x = 0
+                    spiller.hastighet.y = 0
+                    spiller.hastighet.x = 0
                 }
             })
-            player.update()
+            spiller.update()
 
-            ghosts.forEach(ghost => {
-                ghost.update()
+            spoekelser.forEach(spoekelse => {
+                spoekelse.update()
 
 
-                let collisions = []
-                boundaries.forEach(boundary => {            
+                let kollisjoner = []
+                grenser.forEach(grense => {            
                     if(
-                        !collisions.includes('up') &&
-                        circleCollidesWithRectangle({
-                            circle: {...ghost, velocity: {
+                        !kollisjoner.includes('up') &&
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spoekelse, hastighet: {
                                 x: 0,
-                                y: -ghost.speed
+                                y: -spoekelse.fart
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        collisions.push('up')
+                        kollisjoner.push('up')
                     }
                     if(
-                        !collisions.includes('right') &&
-                        circleCollidesWithRectangle({
-                            circle: {...ghost, velocity: {
-                                x: ghost.speed,
+                        !kollisjoner.includes('right') &&
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spoekelse, hastighet: {
+                                x: spoekelse.fart,
                                 y: 0
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        collisions.push('right')
+                        kollisjoner.push('right')
                     }
                     if(
-                        !collisions.includes('left') &&
-                        circleCollidesWithRectangle({
-                            circle: {...ghost, velocity: {
-                                x: -ghost.speed,
+                        !kollisjoner.includes('left') &&
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spoekelse, hastighet: {
+                                x: -spoekelse.fart,
                                 y: 0
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        collisions.push('left')
+                        kollisjoner.push('left')
                     }
                     if(
-                        !collisions.includes('down') &&
-                        circleCollidesWithRectangle({
-                            circle: {...ghost, velocity: {
+                        !kollisjoner.includes('down') &&
+                        sirkelKollidereMedRektangel({
+                            sirkel: {...spoekelse, hastighet: {
                                 x: 0,
-                                y: ghost.speed
+                                y: spoekelse.fart
                             }},
-                            rectangle: boundary
+                            rektangel: grense
                         })
                     ){
-                        collisions.push('down')
+                        kollisjoner.push('down')
                     }
                 })
 
 
-                if(collisions.length > ghost.prevCollisions.length){ 
-                ghost.prevCollisions = collisions }
+                if(kollisjoner.length > spoekelse.tidligereKollisjoner.length){ 
+                spoekelse.tidligereKollisjoner = kollisjoner }
                 
-                if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
+                if (JSON.stringify(kollisjoner) !== JSON.stringify(spoekelse.tidligereKollisjoner)) {
 
 
-                    if (ghost.velocity.x > 0) ghost.prevCollisions.push('right')
-                    else if (ghost.velocity.x < 0) ghost.prevCollisions.push('left')
-                    else if (ghost.velocity.y < 0) ghost.prevCollisions.push('up')
-                    else if (ghost.velocity.y > 0) ghost.prevCollisions.push('down')
+                    if (spoekelse.hastighet.x > 0) spoekelse.tidligereKollisjoner.push('right')
+                    else if (spoekelse.hastighet.x < 0) spoekelse.tidligereKollisjoner.push('left')
+                    else if (spoekelse.hastighet.y < 0) spoekelse.tidligereKollisjoner.push('up')
+                    else if (spoekelse.hastighet.y > 0) spoekelse.tidligereKollisjoner.push('down')
 
                     
                     
-                    const pathways = ghost.prevCollisions.filter((collision) => {
-                        return !collisions.includes(collision)
+                    const stier = spoekelse.tidligereKollisjoner.filter((kollisjon) => {
+                        return !kollisjoner.includes(kollisjon)
                     })
 
                     
 
-                    let direction = pathways[Math.floor(Math.random() * pathways.length)]
+                    let retning = stier[Math.floor(Math.random() * stier.length)]
 
 
 
-                    if (direction == 'down'){
-                        ghost.velocity.y = ghost.speed
-                        ghost.velocity.x = 0
+                    if (retning == 'down'){
+                        spoekelse.hastighet.y = spoekelse.fart
+                        spoekelse.hastighet.x = 0
                     }
-                    else if (direction == 'up'){
-                        ghost.velocity.y = -ghost.speed
-                        ghost.velocity.x = 0
+                    else if (retning == 'up'){
+                        spoekelse.hastighet.y = -spoekelse.fart
+                        spoekelse.hastighet.x = 0
                     }
-                    else if (direction  == 'right'){
-                        ghost.velocity.y = 0
-                        ghost.velocity.x = ghost.speed
-                    }
-
-                    else if (direction == 'left'){
-                        ghost.velocity.y = 0
-                        ghost.velocity.x = -ghost.speed
+                    else if (retning  == 'right'){
+                        spoekelse.hastighet.y = 0
+                        spoekelse.hastighet.x = spoekelse.fart
                     }
 
-                    ghost.prevCollisions = [] 
+                    else if (retning == 'left'){
+                        spoekelse.hastighet.y = 0
+                        spoekelse.hastighet.x = -spoekelse.fart
+                    }
+
+                    spoekelse.tidligereKollisjoner = [] 
                 }
             })
 
 
 
 
-            if (player.velocity.x > 0) {
-                player.rotation = 0
+            if (spiller.hastighet.x > 0) {
+                spiller.rotasjon = 0
             }
-            else if (player.velocity.x < 0){
-                player.rotation = Math.PI
+            else if (spiller.hastighet.x < 0){
+                spiller.rotasjon = Math.PI
             }
-            else if (player.velocity.y > 0){
-                player.rotation = Math.PI/2
+            else if (spiller.hastighet.y > 0){
+                spiller.rotasjon = Math.PI/2
             }
-            else if (player.velocity.y < 0){
-                player.rotation = Math.PI * 1.5
+            else if (spiller.hastighet.y < 0){
+                spiller.rotasjon = Math.PI * 1.5
             }
-        } //end of animate
+        } //end of animere
 
-        animate()
+        animere()
 
             
 
 
         addEventListener('keydown', function({key}){
             if(key == 'w' || key == "W"){
-                keys.w.pressed = true
-                lastKey = 'w'
+                taster.w.presset = true
+                sisteTast = 'w'
             }
             else if (key == 'a' || key == "A"){
-                keys.a.pressed = true
-                lastKey = 'a'
+                taster.a.presset = true
+                sisteTast = 'a'
             }
             else if (key == 's' || key == "S"){
-                keys.s.pressed = true
-                lastKey = 's'
+                taster.s.presset = true
+                sisteTast = 's'
             }
             else if (key == 'd' || key == "D"){
-                keys.d.pressed = true
-                lastKey = 'd'
+                taster.d.presset = true
+                sisteTast = 'd'
             }
         })
 
-        addEventListener('keyup', function({key}){
+/*         addEventListener('keyup', function({key}){
             if(key == 'w' || key == "W"){
-                keys.w.pressed = false
+                taster.w.presset = false
             }
             else if (key == 'a' || key == "A"){
-                keys.a.pressed = false
+                taster.a.presset = false
             }
             else if (key == 's' || key == "S"){
-                keys.s.pressed = false
+                taster.s.presset = false
             }
             else if (key == 'd' || key == "D"){
-                keys.d.pressed = false
+                taster.d.presset = false
             }
-        })
+        }) */
 
 
-        buttonsEls[0].addEventListener('click', function(){
-            keys.w.pressed = true
-            lastKey = 'w'
+        knapperEls[0].addEventListener('click', function(){
+            taster.w.presset = true
+            sisteTast = 'w'
         })
-        buttonsEls[1].addEventListener('click', function(){
-            keys.a.pressed = true
-            lastKey = 'a'
+        knapperEls[1].addEventListener('click', function(){
+            taster.a.presset = true
+            sisteTast = 'a'
         })
-        buttonsEls[2].addEventListener('click', function(){
-            keys.s.pressed = true
-            lastKey = 's'
+        knapperEls[2].addEventListener('click', function(){
+            taster.s.presset = true
+            sisteTast = 's'
         })
-        buttonsEls[3].addEventListener('click', function(){
-            keys.d.pressed = true
-            lastKey = 'd'
+        knapperEls[3].addEventListener('click', function(){
+            taster.d.presset = true
+            sisteTast = 'd'
         })
 
         }) 
