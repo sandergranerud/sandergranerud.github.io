@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=5IMXpp3rohQ&t=6001s
-let introEl = document.querySelector('#packman-intro')
+let introEl = document.querySelector('#kjappMann-intro')
 let vanskelighetsgradKnapperEls = document.querySelectorAll('.difficultyGrade')
 
 
@@ -15,10 +15,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
         //Henter informasjon om canvas elementet
         const c = canvasEl.getContext('2d')
         const poengEl = document.querySelector('#poengEl')
-        let scoreText = document.querySelector('#score-text')
+        let poengTekstEl = document.querySelector('#score-text')
         let knapperEls = document.querySelectorAll('.movement')
 
-        scoreText.classList.remove('hidden');
+        poengTekstEl.classList.remove('hidden');
         poengEl.classList.remove('hidden');
         canvasEl.classList.remove('hidden');
         for (let i = 0; i<knapperEls.length; i++){
@@ -210,10 +210,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
 
         let farger =['red', 'pink', 'green', 'orange', 'lightBlue']
 
-        let kuler = []
-        let grenser = []
-        let powerUps = []
-        let spoekelser = []
+        let kulerArr = []
+        let grenserArr = []
+        let powerUpsArr = []
+        let spoekelserArr = []
         let spiller = new Spiller ({
             posisjon: {
                 x: Grense.bredde * 1.5,
@@ -256,7 +256,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
         }
 
         function lagGrense(source, j, i){
-            grenser.push(  
+            grenserArr.push(  
             new Grense({
                 posisjon: {
                     x: Grense.bredde * j,
@@ -319,7 +319,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     lagGrense('./Bilder/pipeCross.png', j, i)            
                 }
                 else if (kart[i][j] == "."){
-                    kuler.push(
+                    kulerArr.push(
                         new Kule({
                             posisjon: {
                                 x: Grense.bredde * j + Grense.bredde/2,
@@ -329,7 +329,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     )
                 }
                 else if (kart[i][j] == "p"){
-                    powerUps.push(
+                    powerUpsArr.push(
                         new PowerUp({
                             posisjon: {
                                 x: Grense.bredde * j + Grense.bredde/2,
@@ -346,7 +346,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
 
         
         for (let i = 0; i<antallSpoekelser;i++){
-            spoekelser.push(new Spoekelse({
+            spoekelserArr.push(new Spoekelse({
                 posisjon: {
                     x: Grense.bredde * 1.5 * 8,
                     y: Grense.hoyde * 1.5 * 9
@@ -381,8 +381,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
 
             
             if (taster.w.presset && sisteTast === 'w') {
-                for (let i = 0 ; i < grenser.length; i++){
-                    let grense = grenser[i] 
+                for (let i = 0 ; i < grenserArr.length; i++){
+                    let grense = grenserArr[i] 
                     if(
                         sirkelKollidereMedRektangel({
                             sirkel: {...spiller, hastighet: {
@@ -401,8 +401,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                 }
             }
             else if (taster.a.presset && sisteTast === 'a') {
-                for (let i = 0 ; i < grenser.length; i++){
-                    let grense = grenser[i] 
+                for (let i = 0 ; i < grenserArr.length; i++){
+                    let grense = grenserArr[i] 
                     if(
                         sirkelKollidereMedRektangel({
                             sirkel: {...spiller, hastighet: {
@@ -421,8 +421,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                 }
             }
             else if (taster.s.presset && sisteTast === 's') {
-                for (let i = 0 ; i < grenser.length; i++){
-                    let grense = grenser[i] 
+                for (let i = 0 ; i < grenserArr.length; i++){
+                    let grense = grenserArr[i] 
                     if(
                         sirkelKollidereMedRektangel({
                             sirkel: {...spiller, hastighet: {
@@ -441,8 +441,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                 }
             }
             else if (taster.d.presset && sisteTast === 'd') {
-                for (let i = 0 ; i < grenser.length; i++){
-                    let grense = grenser[i] 
+                for (let i = 0 ; i < grenserArr.length; i++){
+                    let grense = grenserArr[i] 
                     if(
                         sirkelKollidereMedRektangel({
                             sirkel: {...spiller, hastighet: {
@@ -462,8 +462,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
             }
 
             // detect collision between spoekelser and spiller
-            for (let i = spoekelser.length -1; 0 <= i; i--){
-                let spoekelse = spoekelser[i]
+            for (let i = spoekelserArr.length -1; 0 <= i; i--){
+                let spoekelse = spoekelserArr[i]
                     //spoekelse touches spiller
                     if (Math.hypot(
                         spoekelse.posisjon.x - spiller.posisjon.x,
@@ -473,7 +473,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                         ) {
 
                             if (spoekelse.redd){
-                                spoekelser.splice(i, 1)
+                                spoekelserArr.splice(i, 1)
                             }
                             else { 
                             cancelAnimationFrame(animasjonsId)
@@ -531,7 +531,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
 
 
             // Win condition goes here
-            if (kuler.length === 0){
+            if (kulerArr.length === 0){
                 cancelAnimationFrame(animasjonsId)
 
                 document.body.style.transition = "background-color 1s ease"
@@ -580,8 +580,8 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
 
                         
             // power ups go
-            for (let i = powerUps.length -1; 0 <= i; i--){
-                let powerUp = powerUps[i]
+            for (let i = powerUpsArr.length -1; 0 <= i; i--){
+                let powerUp = powerUpsArr[i]
                 powerUp.draw()
 
                 //spiller collides with power ups
@@ -591,10 +591,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     ) <
                     powerUp.radius + spiller.radius
                     ){
-                        powerUps.splice(i, 1)
+                        powerUpsArr.splice(i, 1)
 
                         //spoekelse redd
-                        spoekelser.forEach(spoekelse => {
+                        spoekelserArr.forEach(spoekelse => {
                             spoekelse.redd = true
 
 
@@ -605,9 +605,9 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     }
             }
 
-            //Touch kuler here
-            for (let i = kuler.length -1; 0 <= i; i--){
-                let kule = kuler[i]
+            //Touch kulerArr here
+            for (let i = kulerArr.length -1; 0 <= i; i--){
+                let kule = kulerArr[i]
                 kule.draw()
 
                 if (Math.hypot(
@@ -616,13 +616,13 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     ) <
                     kule.radius + spiller.radius
                     ) {
-                    kuler.splice(i, 1)
+                    kulerArr.splice(i, 1)
                     score += poengMengde
                     poengEl.innerHTML = score
                 }
             }
 
-            grenser.forEach((grense) => {
+            grenserArr.forEach((grense) => {
                 grense.draw()
 
                 if(
@@ -638,14 +638,14 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
             })
             spiller.update()
 
-            spoekelser.forEach(spoekelse => {
+            spoekelserArr.forEach(spoekelse => {
                 spoekelse.update()
 
 
-                let kollisjoner = []
-                grenser.forEach(grense => {            
+                let kollisjonerArr = []
+                grenserArr.forEach(grense => {            
                     if(
-                        !kollisjoner.includes('up') &&
+                        !kollisjonerArr.includes('up') &&
                         sirkelKollidereMedRektangel({
                             sirkel: {...spoekelse, hastighet: {
                                 x: 0,
@@ -654,10 +654,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                             rektangel: grense
                         })
                     ){
-                        kollisjoner.push('up')
+                        kollisjonerArr.push('up')
                     }
                     if(
-                        !kollisjoner.includes('right') &&
+                        !kollisjonerArr.includes('right') &&
                         sirkelKollidereMedRektangel({
                             sirkel: {...spoekelse, hastighet: {
                                 x: spoekelse.fart,
@@ -666,10 +666,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                             rektangel: grense
                         })
                     ){
-                        kollisjoner.push('right')
+                        kollisjonerArr.push('right')
                     }
                     if(
-                        !kollisjoner.includes('left') &&
+                        !kollisjonerArr.includes('left') &&
                         sirkelKollidereMedRektangel({
                             sirkel: {...spoekelse, hastighet: {
                                 x: -spoekelse.fart,
@@ -678,10 +678,10 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                             rektangel: grense
                         })
                     ){
-                        kollisjoner.push('left')
+                        kollisjonerArr.push('left')
                     }
                     if(
-                        !kollisjoner.includes('down') &&
+                        !kollisjonerArr.includes('down') &&
                         sirkelKollidereMedRektangel({
                             sirkel: {...spoekelse, hastighet: {
                                 x: 0,
@@ -690,15 +690,15 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                             rektangel: grense
                         })
                     ){
-                        kollisjoner.push('down')
+                        kollisjonerArr.push('down')
                     }
                 })
 
 
-                if(kollisjoner.length > spoekelse.tidligereKollisjoner.length){ 
-                spoekelse.tidligereKollisjoner = kollisjoner }
+                if(kollisjonerArr.length > spoekelse.tidligereKollisjoner.length){ 
+                spoekelse.tidligereKollisjoner = kollisjonerArr }
                 
-                if (JSON.stringify(kollisjoner) !== JSON.stringify(spoekelse.tidligereKollisjoner)) {
+                if (JSON.stringify(kollisjonerArr) !== JSON.stringify(spoekelse.tidligereKollisjoner)) {
 
 
                     if (spoekelse.hastighet.x > 0) spoekelse.tidligereKollisjoner.push('right')
@@ -709,7 +709,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     
                     
                     const stier = spoekelse.tidligereKollisjoner.filter((kollisjon) => {
-                        return !kollisjoner.includes(kollisjon)
+                        return !kollisjonerArr.includes(kollisjon)
                     })
 
                     
