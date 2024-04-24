@@ -1,4 +1,4 @@
-// https://www.youtube.com/watch?v=5IMXpp3rohQ&t=6001s
+// Pacman youtube video: https://www.youtube.com/watch?v=5IMXpp3rohQ&t=6001s
 let introEl = document.querySelector('#kjappMann-intro')
 let vanskelighetsgradKnapperEls = document.querySelectorAll('.difficultyGrade')
 
