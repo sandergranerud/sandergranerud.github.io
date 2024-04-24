@@ -22,10 +22,12 @@ header{
     display: flex;
     justify-content: left;
     align-items: center;
+
+    border-bottom: solid 1px white;
 }
 
 header .fa-house{
-    color: #282123;
+    color: white;
     font-size: 35px;
 
     padding: 10px;
@@ -76,6 +78,7 @@ footer div{
 
 main div a img{
     border-radius: 10px;
+    
    
 }
 
@@ -85,8 +88,10 @@ main div a img{
 
 .picture-container1 { 
     position: relative;
+    margin-top: 17px;
 
     height: 75vh;
+
 }
 
 .picture-container1 a, .picture-container1 a img, .picture-container1 video{
