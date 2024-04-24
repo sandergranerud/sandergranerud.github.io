@@ -385,6 +385,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     let grense = grenserArr[i] 
                     if(
                         sirkelKollidereMedRektangel({
+                            // ...spiller, ... kalles spread operator og dupliserer informasjonene om spiller, og lar oss endre hastigheten i objektet spilller.
                             sirkel: {...spiller, hastighet: {
                                 x: 0,
                                 y: -spiller.fart
