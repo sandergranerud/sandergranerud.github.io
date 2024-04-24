@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #1b1a1a;
     display: flex;
     flex-direction: column;
 
@@ -78,9 +78,22 @@ footer div{
 
 main div a img{
     border-radius: 10px;
+
     
-   
 }
+.picture-container1 a img{
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 265, 0.2), 0 4px 6px 1px rgba(0, 0, 265, 0.19);  
+    
+}
+.picture-container2 a img{
+    box-shadow: 0 1px 6px 0 rgba(265, 0, 0, 0.2), 0 4px 6px 1px rgba(265, 0, 0, 0.19);  
+    
+}
+.picture-container3 a img{
+    box-shadow: 0 1px 6px 0 rgba(0, 265, 0, 0.2), 0 4px 6px 1px rgba(0, 265, 0, 0.19);  
+    
+}
+
 
 .picture-container1, .picture-container2, .picture-container3{
     margin: 10px;
@@ -93,6 +106,7 @@ main div a img{
     height: 75vh;
 
 }
+
 
 .picture-container1 a, .picture-container1 a img, .picture-container1 video{
     width: 40vw;
