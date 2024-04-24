@@ -1,4 +1,4 @@
-let tekstBoksEl = document.getElementById("tekst-boks")
+let tekstBoksEl = document.getElementById("text-box")
 
 if(!localStorage.poeng){
     localStorage.poeng = 0

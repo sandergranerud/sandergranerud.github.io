@@ -15,7 +15,7 @@ body {
 }
 header{
     width: 100vw;
-    height: 10vh;
+    height: 12.5vh;
 
     background-image: linear-gradient(to right, rgb(219, 51, 51), rgb(13, 179, 63), rgb(15, 102, 201));
 
@@ -29,47 +29,72 @@ header .fa-house{
     font-size: 35px;
 
     padding: 10px;
-    margin-left: 8vw;
+    margin-left: 15vw;
 }
 
 
 
 
 main{
-    width: 80vw;
-    height: 30vh;
-    margin: 10vh auto;
+    width: fit-content;
+    height: fit-content;
 
-    border-radius: 10px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+
+
+
+
     overflow: hidden;
-
-
 
     display: flex;
 
 
-    max-width: 600px;
+    max-width: 800px;
 }
 
-#tekst-boks{
-    background-color: lightblue;
-    width: 75vw;
+footer{
+    background-image: linear-gradient(to left, rgb(219, 51, 51, 0.2), rgb(13, 179, 63, 0.2), rgb(15, 102, 201, 0.2));
+    width: 100vw;
     padding: 20px;
-    border-radius: 20px;
+
+    border-top: solid 1px;
+    border-color: rgba(255, 255, 255, 0.671);
+
+    display: flex;
+    justify-content: center;
+
+}
+
+footer p, footer h3{
+    color: white;
+}
+footer div{
+    width: 80vw;
+}
+
+
+main div a img{
+    border-radius: 10px;
+   
+}
+
+.picture-container1, .picture-container2, .picture-container3{
+    margin: 10px;
 }
 
 .picture-container1 { 
     position: relative;
 
-    height: 30vh;
+    height: 75vh;
 }
 
 .picture-container1 a, .picture-container1 a img{
     width: 40vw;
-    height: 30vh;
+    height: 75vh;
     object-fit: cover;
 
-    max-width: 300px;
+    max-width: 400px;
     
 }
 
@@ -83,35 +108,31 @@ main{
     transform: translate(-50%, -50%);
     opacity: 0;
 
-    height: 30vh;
+    height: 75vh;
 
     object-fit: cover;
 
-    max-width: 300px;
+    max-width: 400px;
 }
 
 
 
 .smaller-games { 
-
-
-    height: 30vh;
+    height: 75vh;
 }
 
-img {
-    border: solid blue;
-}
 
 .picture-container2, .picture-container3 {
     position: relative;
+
 }
 
 .smaller-games a, .smaller-games a img{
     width: 40vw;
-    height: 15vh;
+    height: 37.5vh;
     object-fit: cover;
 
-    max-width: 300px;
+    max-width: 370px;
 
     
 }
@@ -131,11 +152,35 @@ img {
 
     object-fit: cover;
 
-    max-width: 300px;
+    max-width: 400px;
 }
 
 
-@media(max-width: 500px){
+@media(max-width: 600px){
+/*     main{
+        flex-direction: column;
+    }
 
+    .picture-container1{
+        height: 30vh;
+    }
+    .picture-container1 a, .picture-container1 a img{
+        height: 30vh;
+    }
+    .picture-container1 video{
+        height: 30vh;
+    }
+    .smaller-games { 
+        height: 30vh;
+    }
+    .smaller-games a, .smaller-games a img{
+
+        height: 30vh;
+
+ 
+    }
+
+
+ */
 
 }
