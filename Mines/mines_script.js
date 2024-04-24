@@ -183,7 +183,7 @@ function cashInnF(){   /* Når cash inn trykkes */
         leaderboardPersonerArr.sort((a, b) => b.score - a.score)
         leaderboardArr = []
         for (let i = 0; i < 5; i++) {
-            leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+            leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + ' poeng'
             leaderboardLiArr.push(leaderboardLiEl)
             
         }console.log(leaderboardPersonerArr)
