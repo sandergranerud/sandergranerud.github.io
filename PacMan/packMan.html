@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacman</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="stylesheet_packman.css">
+    <link rel="stylesheet" href="stylesheet_kjappMann.css">
 
     <style>
-        body{
-            background-color: #242222;
-        }
 
-        #packman-intro{
+        #kjappMann-intro{
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,7 +26,7 @@
 
             
         }
-        #packman-intro div{
+        #kjappMann-intro div{
             margin: 10px;
         }
         
@@ -39,18 +36,14 @@
             width: 70vw;
             
         }
-
-        
         
         #pacman-text{
             font-weight: 600;
             word-spacing: 1.5px;
             max-width:400px ;
-        }
+        }        
 
-        
-
-        h1, #intro-box{
+        #intro-tittel, #intro-box{
             background-color: #242222;
             padding: 20px;
             
@@ -64,7 +57,7 @@
 
         @media screen and (max-width: 550px){
             
-            #packman-intro{
+            #kjappMann-intro{
                 height: 120vh;
             }
 
@@ -83,10 +76,10 @@
         <i class="fa-solid fa-house"></i>
         </a>
     </header>
-    <div id="packman-intro">
-        <h1 id="intro-title">Packman</h1>
+    <div id="kjappMann-intro">
+        <h1 id="intro-tittel">Kjapp-Mann</h1>
         <div id="intro-box">
-            <p id="pacman-text"> Packman er et klassisk arkadespill. Reglene er enkle. Du styrer Packman, en rund figur som beveger seg rundt på et rutenett fylt med prikker og spøkelser. Målet ditt er å spise alle prikkene på rutenettet uten å bli fanget av spøkelsene. Hver gang du spiser en stor prikk, kan Packman midlertidig spise spøkelsene også. Bruk W.A.S.D til å styre Packman rundt på rutenettet, eller knappene på skjermen hvis du spiller på mobil eller nettbrett. 
+            <p id="pacman-text"> Kjapp-Mann er et klassisk arkadespill. Reglene er enkle. Du styrer Kjapp-Mann, en rund figur som beveger seg rundt på et rutenett fylt med prikker og spøkelser. Målet ditt er å spise alle prikkene på rutenettet uten å bli fanget av spøkelsene. Hver gang du spiser en stor prikk, kan Kjapp-Mann midlertidig spise spøkelsene også. Bruk W.A.S.D til å styre Kjapp-Mann rundt på rutenettet, eller knappene på skjermen hvis du spiller på mobil eller nettbrett. 
                 <br>
                 <br>
                 Pass på spøkelsene og ikke la dem ta deg! Lykke til!
@@ -102,7 +95,7 @@
     <main>
 
         <p >
-            <span class="hidden" id="score-text">Score: </span><span id="scoreEl" class="hidden">0</span>
+            <span class="hidden" id="score-text">Poeng: </span><span id="poengEl" class="hidden">0</span>
         </p>
         <canvas class="hidden" width="600" height="600"></canvas>
         <div class="buttons">            
@@ -115,6 +108,6 @@
         </div>
     </main>
 
-    <script src="script_packman.js"></script>
+    <script src="script_kjapMann.js"></script>
 </body>
 </html>
