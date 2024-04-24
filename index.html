@@ -6,6 +6,45 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="index_style.css">
+
+    <style>
+        .sentrert-tekst{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+
+
+            
+
+            width: 60%;
+            height: 60%;
+
+        }
+        .sentrert-tekst p{
+            font-size: 5vw;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+           
+        }
+
+        .picture-container1:hover a .sentrert-tekst, .picture-container2:hover a .sentrert-tekst, .picture-container3:hover a .sentrert-tekst{
+            display: none;
+            
+        }
+
+        @media(min-width: 600px){
+            .sentrert-tekst p{
+                font-size: 40px;
+                
+            }
+        }
+
+        
+    </style>
 </head>
 <body>
     <header>
@@ -15,23 +54,13 @@
 
     </header>
 
-    <div id="tekst-boks">
-        <p>
-            Velkommen til RGB-spill!
-            <br>
-            Her kan du spille spill, tjene poeng og klatre Leaderboard-et. Poengene dine tjener du på "Kjapp-mann" og "Nonogram". 
-            Du kan spille poengene vekk eller tjene stort på "Minefelt". 
-            <br>
-            Lykke til!
-        </p>
-    </div>
-
-
+    
     <main>
 
         <div class="picture-container1">
             <a href="PacMan/packMan.html">
                 <img src="bilder/pacman-7024232_1280.jpg" alt="Spill1">
+                <div class="sentrert-tekst"><p>Kjapp <br> Mann</p></div>
             </a>            
             <video src="bilder/video.test.2.mp4" muted></video>
 
@@ -39,22 +68,39 @@
         <div class="smaller-games">
             <div class="picture-container2">
                 <a href="nonogram/nonograrm_intro.html">
-                    <img src="bilder/IMG_2149.jpg" alt="Spill1">
-                </a>            
+                    <img src="bilder/nonogram_index.jpg" alt="Spill1">
+                    <div class="sentrert-tekst"><p>Nonogram</p></div>
+                </a>
+                            
                 <video src="bilder/video.test.2.mp4" muted></video>
 
             </div>
             <div class="picture-container3">
                 <a href="spill.html">
                     <img src="bilder/IMG_2149.jpg" alt="Spill1">
+                    <div class="sentrert-tekst"><p>Minefelt</p></div>
                 </a>            
                     <video src="bilder/video.test.mp4" muted></video>
             </div>
         </div>
 
 
+    
         
     </main>
+
+    <footer>
+        <div id="text-box">
+            <p>
+                Velkommen til RGB-spill!
+                <br>
+                Her kan du spille spill, tjene poeng og klatre Leaderboard-et. Poengene dine tjener du på "Kjapp-mann" og "Nonogram". 
+                Du kan spille poengene vekk eller tjene stort på "Minefelt". 
+                <br>
+                Lykke til!
+            </p>
+        </div>
+    </footer>
 
     <script src="index_js.js"></script>
 </body>
