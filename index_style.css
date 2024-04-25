@@ -102,16 +102,22 @@ main div a img{
     
 }
 .picture-container1 a img{
-    box-shadow: 0 1px 6px 0 rgba(0, 0, 265, 0.2), 0 4px 6px 1px rgba(0, 0, 265, 0.19);  
+    box-shadow: 0 2px 6px 1px rgba(0, 0, 265, 0.2), 2px 4px 6px 2px rgba(0, 0, 265, 0.19);  
     
 }
 .picture-container2 a img{
     box-shadow: 0 1px 6px 0 rgba(265, 0, 0, 0.2), 0 4px 6px 1px rgba(265, 0, 0, 0.19);  
+    border: 4px double rgb(62, 18, 18);
     
 }
 .picture-container3 a img{
-    box-shadow: 0 1px 6px 0 rgba(0, 265, 0, 0.2), 0 4px 6px 1px rgba(0, 265, 0, 0.19);  
+    box-shadow: 4px 1px 3px 0 rgba(0, 265, 0, 0.2), 0 2px 6px 1px rgba(0, 265, 0, 0.19);
+    border: 4px solid rgb(90, 227, 74);
     
+}
+.picture-container3 a div p{
+    font-family:  Georgia, 'Times New Roman', Times, serif;
+    font-size: 43px;
 }
 
 
@@ -213,6 +219,10 @@ main div a img{
     color: white;
     text-shadow: 2px 2px 5px rgb(0, 0, 0);
    
+}
+.picture-container3 a .sentrert-tekst p{
+    text-shadow: 4px 2px 6px rgb(29, 109, 36);
+
 }
 
 .picture-container1:hover a .sentrert-tekst, .picture-container2:hover a .sentrert-tekst, .picture-container3:hover a .sentrert-tekst{
