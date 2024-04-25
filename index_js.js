@@ -4,7 +4,7 @@ if(!localStorage.poeng){
 
 let poengBoksEl = document.getElementById("poeng-boks")
 poengEl = document.createElement("h1")
-poengEl.innerHTML = `Poeng: ${localStorage.poeng}`
+poengEl.innerHTML = `Poeng: ${Math.floor(localStorage.poeng)}`
 
 poengBoksEl.appendChild(poengEl)
 

@@ -492,7 +492,7 @@
                     if(localStorage.vanskelighetsgrad === "lett"){
                         localStorage.poeng = Number(localStorage.poeng) + 300
                     }else if(localStorage.vanskelighetsgrad === "medium"){
-                        localStorage.poeng = Number(localStorage.poeng) + 1000
+                        localStorage.poeng = Number(localStorage.poeng) + 700
                     }else if(localStorage.vanskelighetsgrad === "vanskelig"){
                         localStorage.poeng = Number(localStorage.poeng) + 2000
                     }
@@ -502,7 +502,7 @@
                         mainEl.innerHTML = `<h1>Du klarte det!</h1>
                         <i class="fa-solid fa-trophy"></i>
                         <h2>Din streak er nå: ${nonogramStreak}</h2>
-                        <h2>Poeng: ${localStorage.poeng}</h2>
+                        <h2>Poeng: ${Math.floor(localStorage.poeng)}</h2>
 
                         <button>Ny runde </button>`
 
