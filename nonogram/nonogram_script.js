@@ -100,8 +100,6 @@
 
             radEl.style.gridTemplateColumns = antallDiv
 
-            
-
             let verdier = []
             
             for (j = 0; j < radLength; j++){
@@ -130,7 +128,7 @@
             boksContainerEl.appendChild(radEl)
 
   
-            }
+        }
 
             //Lager array av radene og gjenoppretter array med 0-er og 1-ere som bestemmer riktig og feil
             //Deretter gjennomgår algoritme for å sjekke hvor mange 1-ere som kommer på rad
@@ -141,7 +139,7 @@
                 
                 let verdierHorisontal = []
                 for(j = 0; j<horisontalEls.length; j++){
-                    let horisontalEl = horisontalEls[j]
+
                     let horisontalElName = horisontalEls[j].getAttribute("name")
 
                     if(horisontalElName === "riktig"){
@@ -195,7 +193,7 @@
                 
                 let verdierVertikal = []
                 for(j = 0; j<vertikalEls.length; j++){
-                    let vertikalEl = vertikalEls[j]
+
 
                     let vertikalElName = vertikalEls[j].getAttribute("name")
 
@@ -264,6 +262,8 @@
             console.log(aktiv)
             })
 
+            //Setter streak og highscore avhengig av valgt vanskelighetsgrad
+
             function setteStreakogHs(){
                 if(localStorage.vanskelighetsgrad === "lett"){
                     localStorage.nonogramStreakLett = nonogramStreak
@@ -275,6 +275,16 @@
                     localStorage.nonogramStreakVanskelig = nonogramStreak
                     localStorage.nonogramHighscoreVanskelig = nonogramHighscore
                 }
+            }
+
+            function mistetLiv(){
+
+                liv-=1
+
+                document.body.style.transition = "background-color 1s ease"
+                setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
+                setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
+
             }
 
 
@@ -312,11 +322,7 @@
                         aktivBoksEl.style.backgroundColor = "#f27f77"
                         aktivBoksEl.setAttribute("value", "full")
                         
-                        liv-=1
-
-                        document.body.style.transition = "background-color 1s ease"
-                        setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                        setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
+                        mistetLiv()
                         }
 
                 }
@@ -326,11 +332,7 @@
                     aktivBoksEl.style.backgroundColor = "#451313"
                     aktivBoksEl.setAttribute("value", "full")
 
-                    liv-=1
-
-                    document.body.style.transition = "background-color 1s ease"
-                    setTimeout(function(){document.body.style.backgroundColor = "red"}, 10)
-                    setTimeout(function(){document.body.style.backgroundColor = "#242222"}, 200)
+                    mistetLiv()
 
 
                 }

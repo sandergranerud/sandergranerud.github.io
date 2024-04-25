@@ -231,10 +231,7 @@ button:hover{
     }
 
     header{
-        height: 12.5vh;
-    }
-    header .fa-house{
-        margin-left: 15vw;
+        height: 13vh;
     }
 
     #score-boxes-container{
