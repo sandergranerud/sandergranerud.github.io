@@ -17,6 +17,7 @@ body{
 .diverTilGridOppsettet{   /* I tillegg til clasen, navnes disse direct childene av holderAvAlt med "div" først i id'en. De dekker alltid ut plassen tilgjengelig i sin grid-rute*/
     height: 100%;
     width: 100%;
+
 }
 #divForBack, #divForOverskrift, #divForLeaderboardKnapp{   /* Headeren av nettsiden, følte det kunne gjøre ting vanskeligere å putte disse i egen div, fordi grid-columnene endres med media quieries*/
     border-bottom: 4px ridge rgb(200,210,205);
@@ -146,6 +147,7 @@ body{
     color: rgb(58, 86, 60);
     background-color: rgb(224, 232, 210);
     margin: 15px 0 20px;
+    cursor: default;
 }
 #betInp{
     cursor: text;
@@ -178,6 +180,7 @@ body{
     font-size: 120%;
     color: rgb(43, 200, 130);
     font-weight: 700;
+    cursor: pointer;
 }
 #divForHolderAvLeaderboard{
     grid-column: 11 / 13;

@@ -172,7 +172,7 @@ function cashInnF(){   /* Når cash inn trykkes */
     randomBoks.removeEventListener('click',rodKlikkF)
     cashInnOgRestart.innerHTML = 'Restart'
     cashInnOgRestart.addEventListener('click', restartF)
-    localStorage.poeng = poeng   /* Updater poengsum i local storage */
+    localStorage.poeng = Math.floor(poeng)   /* Updater poengsum i local storage */
 
     /* Updater leaderboarden */
     if(poeng > leaderboardPersonerArr[4].score){
