@@ -147,6 +147,7 @@ function rodKlikkF(e){   /* Når det røde bombe-elementet klikkes */
 function restartF(){   /* Når restart trykkes */
     for (let i = 0; i < bokserArr.length; i++) {   /* Resetter farger på bokser */
         bokserArr[i].style.backgroundColor = 'rgb(235, 240, 225)'
+        bokserArr[i].style.backgroundImage = ''
     }
     tilbakeMeld.style.border = '2px ridge rgb(139, 184, 151)'   /* Resetter border fra å være dashed */
     tilbakeMeld.innerHTML = 'Gevinst: '
