@@ -1,6 +1,6 @@
 // Pacman youtube video: https://www.youtube.com/watch?v=5IMXpp3rohQ&t=6001s
-let introEl = document.querySelector('#kjappMann-intro')
-let vanskelighetsgradKnapperEls = document.querySelectorAll('.difficultyGrade')
+const introEl = document.querySelector('#kjappMann-intro')
+const vanskelighetsgradKnapperEls = document.querySelectorAll('.difficultyGrade')
 
 
 
@@ -10,13 +10,13 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
     vanskelighetsgradKnapperEls[i].addEventListener('click', function(){
         introEl.style.display = 'none'        
 
-        let mainEl = document.querySelector('main')
+        const mainEl = document.querySelector('main')
         const canvasEl = document.querySelector('canvas')
         //Henter informasjon om canvas elementet
         const c = canvasEl.getContext('2d')
         const poengEl = document.querySelector('#poengEl')
-        let poengTekstEl = document.querySelector('#score-text')
-        let knapperEls = document.querySelectorAll('.movement')
+        const poengTekstEl = document.querySelector('#score-text')
+        const knapperEls = document.querySelectorAll('.movement')
 
         poengTekstEl.classList.remove('hidden');
         poengEl.classList.remove('hidden');
@@ -490,7 +490,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
         
                                 <i class="fa-solid fa-heart-crack"></i>
         
-                                <h2>Din score ble: ${score} </h2> 
+                                <h2>Dine poeng ble: ${score} </h2> 
                                 <h2>Prøv på nytt! </h2>
         
                                 <div id = "knapp-boks">
@@ -542,7 +542,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                 setTimeout(function() {
                     mainEl.innerHTML = `<h1>Du klarte det!</h1>
                     <i class="fa-solid fa-trophy"></i>
-                    <h2>Din score ble: ${score}</h2>
+                    <h2>Dine poeng ble: ${score}</h2>
 
                     <div id = "knapp-boks">
         
@@ -708,7 +708,7 @@ for (let i = 0; i<vanskelighetsgradKnapperEls.length;i++){
                     else if (spoekelse.hastighet.y > 0) spoekelse.tidligereKollisjoner.push('down')
 
                     
-                    
+                    //filtrer ut kollisjoner som allerede finnes
                     const stier = spoekelse.tidligereKollisjoner.filter((kollisjon) => {
                         return !kollisjonerArr.includes(kollisjon)
                     })
