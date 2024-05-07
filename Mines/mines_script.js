@@ -13,7 +13,7 @@ divForHolderAvHolderAvTekstEl = document.getElementById('divForHolderAvHolderAvT
 divForHolderAvSpillEl = document.getElementById('divForHolderAvSpill')
 holderAvSpillEl = document.getElementById('holderAvSpill')
 divForHolderAvLeaderboardEl = document.getElementById('divForHolderAvLeaderboard')
-
+leaderboardEls = document.getElementById('leaderboardListe')
 
 
 back.addEventListener('click', function(){
@@ -43,10 +43,14 @@ for (let i = 0; i < 25; i++) {
 leaderboardLiArr = []   /* Array med de 5 fake personene og evt spilleren */
 leaderboardPersonerArr = []  /* Arry med de 5 liste elementene som vises på skjermen */
 async function leaderboardF(){
-    for (let i = 0; i < 5; i++) {
-        fetchedUrl = await fetch('https://randomuser.me/api/')   /* Fant på https://apipheny.io/free-api/ */
-        data = await fetchedUrl.json()   /* Promice om å gjøre informasjonen til json format */
-        randomNavn = data['results'][0]   /* Informasjon om fake enkeltperson */
+    leaderboardPersonerArr = []
+    leaderboardLiArr = []
+
+        fetchedUrl = await fetch('https://randomuser.me/api/?results=5')   /* Fant på https://apipheny.io/free-api/ */
+        data = await fetchedUrl.json()   /* Promice om å gjøre informasjonen til json format */    
+        console.log(data)
+        for (let i = 0; i < 5; i++) {
+        randomNavn = data['results'][i]   /* Informasjon om fake enkeltperson */
         randomScore = Math.floor(Math.random() * 8000) + 4000   /* Random score fra 4 til 12000 */
         fakePerson = {navn: randomNavn.login.username, score: randomScore}  //Per endra her
         leaderboardPersonerArr.push(fakePerson)   /* lager objekter av de 5 fake personene */
@@ -56,7 +60,7 @@ async function leaderboardF(){
     leaderboardPersonerArr.sort((a, b) => b.score - a.score) //Her endra Per
     if(poeng > leaderboardPersonerArr[4].score){
         spiller = {navn: 'you', score: poeng}
-        leaderboardPersonerArr.push(spiller)
+        leaderboardPersonerArr.splice(4,1,spiller)
         leaderboardPersonerArr.sort((a, b) => b.score -a.score)
     }
     /* Lager leaderboarden riktig */
@@ -67,9 +71,11 @@ async function leaderboardF(){
         leaderboardLiArr.push(leaderboardLiEl)
         
     }
+    console.log(leaderboardLiArr)
+    console.log(leaderboardPersonerArr)
 }
-leaderboardF()
-console.log(leaderboardLiArr) 
+/* leaderboardF() */
+
 
 /* Åpning og lukking av leaderboard */
 erLeaderboardKnappTrykket = 0   /* Gjør at samme knapp kan benyttes til åpning og lukking av leaderboard */
@@ -88,6 +94,9 @@ leaderboardKnappEl.addEventListener('click',function(){
             divForLeaderBoardKnappEl.style.gridRow = '3/4'
             divForBack.style.gridRow = '3/4'
         }
+        
+        leaderboardEls.innerHTML = ``
+        leaderboardF()
     }
     else{
         /* Elementene puttes på plass der de var førman trykket leaderboardknappen */
@@ -142,6 +151,10 @@ function rodKlikkF(e){   /* Når det røde bombe-elementet klikkes */
         bokserArr[i].removeEventListener('click', gronnKlikkF)
     }
     randomBoks.removeEventListener('click',rodKlikkF) /* Gjør at den røde bombe-boksene ikke kan klikkes på flere ganger */
+
+    if(poeng < tidligerePoeng && erLeaderboardKnappTrykket === 1){
+        updateLeaderboard()
+    }
 }
 
 function restartF(){   /* Når restart trykkes */
@@ -157,10 +170,12 @@ function restartF(){   /* Når restart trykkes */
     cashInnOgRestart.innerHTML = 'Cash inn'
     cashInnOgRestart.removeEventListener('click',restartF)
     place.addEventListener('click', placeF)
+
 }
 
 function cashInnF(){   /* Når cash inn trykkes */
-    poeng += gevinst + betSum   /* Casher inn summen man vedda pluss eventuelle gevinster */
+    poeng += Math.floor(gevinst + betSum)   /* Casher inn summen man vedda pluss eventuelle gevinster */
+    
     poengEl.innerHTML = `Poeng: ${poeng.toFixed(1)}`
     place.removeEventListener('click', placeF)   
     gevinst = 0
@@ -175,20 +190,9 @@ function cashInnF(){   /* Når cash inn trykkes */
     localStorage.poeng = Math.floor(poeng)   /* Updater poengsum i local storage */
 
     /* Updater leaderboarden */
-    if(poeng > leaderboardPersonerArr[4].score){
-        if(!leaderboardLiArr.includes(leaderboardLiArr.spiller)){   /* TROR IKKKE DETTE FUNKER, FINNES DET EN BEDRE MÅTE Å IDENTIFISERE */
-            spiller = {navn: 'you', score: poeng}
-            leaderboardPersonerArr.push(spiller)
-            console.log(spiller)
-        }
-        leaderboardPersonerArr.sort((a, b) => b.score - a.score)
-        leaderboardArr = []
-        for (let i = 0; i < 5; i++) {
-            leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + ' poeng'
-            leaderboardLiArr.push(leaderboardLiEl)
-            
-        }console.log(leaderboardPersonerArr)
-    }   
+    if(poeng > tidligerePoeng && erLeaderboardKnappTrykket === 1){
+        updateLeaderboard()
+    }
 }
 
 function placeF(){
@@ -220,6 +224,49 @@ function placeF(){
     else{
         tilbakeMeld.innerHTML = 'Bet må være mindre eller lik poeng'
     }
+    tidligerePoeng = poeng + betSum
+}
+function updateLeaderboard(){    
+    console.log(tidligerePoeng)
     
+    if(tidligerePoeng < leaderboardPersonerArr[4].score){
+        spiller = {navn: 'you', score: poeng}
+        leaderboardPersonerArr.splice(4,1,spiller)
+        leaderboardPersonerArr.sort((a, b) => b.score -a.score)
+
+        leaderboardPersonerArr.sort((a, b) => b.score - a.score)
+        leaderboardArr = []
+        leaderboardEls.innerHTML = ``
+        for (let i = 0; i < 5; i++) {
+            leaderboardLiEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
+            leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+            leaderboardLiEl.classList.add('leaderboardLiClass')
+            leaderboardLiArr.push(leaderboardLiEl)
+            
+        }console.log(leaderboardPersonerArr)
+    }
+    else if (tidligerePoeng > leaderboardPersonerArr[4].score){
+        for(let i = 0; i < leaderboardPersonerArr.length; i++){
+        console.log(leaderboardPersonerArr[i].score)
+        
+        if(leaderboardPersonerArr[i].score == tidligerePoeng){
+            leaderboardPersonerArr[i].score = poeng
+            console.log('true')
+            spiller = {navn: 'you', score: poeng}
+            leaderboardPersonerArr.splice(i,1,spiller)
+        }    
+        leaderboardPersonerArr.sort((a, b) => b.score - a.score)
+        leaderboardArr = []
+        leaderboardEls.innerHTML = ``
+        for (let i = 0; i < 5; i++) {
+            leaderboardLiEl = document.getElementById('leaderboardListe').appendChild(document.createElement('li'))
+            leaderboardLiEl.innerHTML = leaderboardPersonerArr[i].navn + ': ' + leaderboardPersonerArr[i].score + 'poeng'
+            leaderboardLiEl.classList.add('leaderboardLiClass')
+            leaderboardLiArr.push(leaderboardLiEl)
+            
+        }console.log(leaderboardPersonerArr)
+    }
+    }
+    tidligerePoeng = poeng
 }
 place.addEventListener('click', placeF)   /* Event-listeneren legges på place-knappen ved åpning av spillet */
