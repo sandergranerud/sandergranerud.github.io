@@ -2,7 +2,7 @@
 *{
     box-sizing: border-box;   /* Passer på at borderne ikke okmmer på utsiden av elementene */
     color: rgb(220, 225, 215);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
 }
 body{
@@ -46,7 +46,6 @@ body{
 #overskrift{
     color: white;  /* Bedre synlighet på en ganske lys bakgrunn */
     font-size: 40px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 600;
     text-align: center;
     padding: 6px 40px;
@@ -118,7 +117,6 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 17px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 600;
     color: rgb(0, 85, 55);
     margin-bottom: 15px; 
@@ -132,7 +130,6 @@ body{
     color: rgb(0, 61, 40);
     border: 2.5px double rgb(140, 170, 148);
     background-color: rgb(255, 255, 246);
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 600;
     border-radius: 3px;
     margin-bottom: 10px;
@@ -210,7 +207,6 @@ body{
 .leaderboardLiClass{   /* De forskjellige personene på leaderboarden */
     color: rgb(0, 61, 40);
     font-weight: 600;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0 20px 35px 0;
 }
 @media(max-width: 1130px){
