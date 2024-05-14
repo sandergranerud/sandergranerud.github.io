@@ -3,7 +3,6 @@
     box-sizing: border-box;   /* Passer på at borderne ikke okmmer på utsiden av elementene */
     color: rgb(220, 225, 215);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
 }
 body{
     background-color: rgb(30, 45, 36);   /* Ser litt rart ut hvis bakgrunnen utenfor nettsiden bare er hvit, særlig under holderAvAlt*/
