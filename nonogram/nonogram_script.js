@@ -314,7 +314,7 @@
                 if(aktivBoksCtrl ===  false){
                     if(aktivBoksName === "riktig"){
                         console.log("trykket riktig")
-                        aktivBoksEl.style.backgroundColor = "#020b17"
+                        aktivBoksEl.style.backgroundColor = "#000000"
                         aktivBoksEl.setAttribute("value", "full")
                     }
                     else if(aktivBoksName === "feil"){
